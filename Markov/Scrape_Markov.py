@@ -1,5 +1,4 @@
 import tweepy
-import csv
 import json
 import sys
 import re

@@ -8,7 +8,7 @@ def gen_markov(text, name):
 
     sentences = []
     for i in range(50):
-        sentences.append(model.make_short_sentence(140))
+        sentences.append(model.make_short_sentence(max_chars=140, tries=100, max_overlap_ratio=.6))
         print sentences[i]
 
     with open(str(name) + '_markov.txt', 'w+') as f:
