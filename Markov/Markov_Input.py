@@ -1,5 +1,5 @@
 import Scrape_Markov
-import Markov_Test
+import Markov_Gen
 
 # https://github.com/jsvine/markovify
 stop = False
@@ -25,5 +25,5 @@ with open(handles_name + '.txt', 'w+') as f:
     for tweet in all_tweets:
         f.write(tweet + "\n")
 
-Markov_Test.gen_markov(all_tweets, handles_name)
+Markov_Gen.gen_markov(all_tweets, handles_name)
 
