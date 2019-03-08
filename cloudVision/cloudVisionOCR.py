@@ -6,13 +6,15 @@ client = vision.ImageAnnotatorClient.from_service_account_file('/Users/richardgr
 # img = '/Volumes/GoogleDrive/My Drive/3. COMP 225/MEME VAULT/fish joint.jpg'
 img = input('enter filepath to image: ')
 
-with open(img, 'rb') as inputImage:
-    content = inputImage.read()
 
-visionImage = vision.types.Image(content=content)
-text_response = client.text_detection(image=visionImage)
+def runOCR(image):
+    with open(image, 'rb') as inputImage:
+        content = inputImage.read()
 
-alltext = [text.description for text in text_response.text_annotations]
+    vision_image = vision.types.Image(content=content)
+    text_response = client.text_detection(image=vision_image)
 
-print(text_response)
-print(alltext[0])
+    alltext = [text.description for text in text_response.text_annotations]
+
+    # print(text_response)
+    print(alltext[0])
