@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "meme-generator-233906",
+  "private_key_id": "802734cd5cac2ffb40bc8693aef95fc23b2df9c0",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDcinwqvIWvgc7n\nJv1uSOd15dLkzebLR0MYk1t8gc4QXDOURC0oPwU4rVxLQpYJU+ucxtAc9UM6vcD+\ncQfJpCcRCpEeMKnsjcNpY8LXfAZicMpYd2LnrjRJvW2cyeB3IoJcMhBlLV/CY6OQ\n8rSO2jOkLNRONTw5/ToBN2EWZPKItoXo3R4PBvLCB5ksYV3nz7VSh67vJ6QJJiAu\nbnw0YM6ySw7FOG64xyEnhxAY4wbD2MROIv7gaxcKa1d8XkWqLIKYffjS9fF8y8hW\n79VFAO4+bwo/qRSJZ5nus2gD/WVEG6+qLQ7uAQoZ+eZpagDi58o2FbUqFKucujkV\nwE0+WrR/AgMBAAECggEAKH6PHQO/okG5/WyF1TWytk2sQxHhgkrD8aPBBSQKc6uS\nVvOLvRuROF5wl2sTBIRxuzgwJ1kLbqI/6RhU/zvSZokjq0DxOnuvOU81i/58Z5/h\nL4xAT10HwdBz63mP6yAdgpM4unMx5Y4JDwjZiW9cUxVeKDwTImyyNV33SDbh56MQ\nwjpl3klWqQg9LGkYbVgmhipu/hNWBsTlBbFSEZeF3IDLh+ztCK3uBkqbXfLkeDaa\nHkZXHOJVLflnGx/qG/1NqgDGNvki30iIyufkRxUOqKH5snKyHPnRHdngc+CIg/is\nKU1cwqgz7R+DpH1TMBei9VeZmr8zueABSVqmuAT9qQKBgQDuZ1sV/tGuTjNORPMC\n7+YaJgAOhh+HrUZNUNPZdNGAA9LB11eGfcXWIspw/wRHgEaTJY5J7d9teHd2yAm3\n2Ck0ZCnBpgIap+9pFnz5iQxnpzG44Eo3rK+8o/7y7j6FUCX1s9fxBz1xekJlD4bS\nP52MtPebBGTW2GlRZywznbiG6QKBgQDs0ZyUTtAZrF3uPf/qRV6KiqhB6UZQSU3I\nUpJP41yk+o2H+yIUq2Vkq5B0EsUMyLD1LeO97lAt2FCAtz6P+JhWOpL9hJf7ST3u\nyc+DWibYGQzevVGN+YkHIlO9U2tH+Mj5TlIt/qfMzUwpdS6+UuZF3Y/wrUqDuN2g\n8vcFu5KPJwKBgGbturbBYLgXzTDiteSzvK3XcDjVEXHbjrm8xupg9D6H6AuGtKQ9\nUxgDx1GH2MoiCNZo5YjnqYoy86kV7pQwQIH9KMYRrWDi1ouRiP2XfQKXffEq7QAi\nj3ErgNxTniyikPEG55mJna6LsXS+gl/t1VC1pR2JhRv5LWdW2w+h7dRZAoGAc9ag\nSac3gadflt665KQj946VeRAbNcB1jKxfJzampYhtXHuKEyQ3h4OoOC7KNlOgw307\n7ja4/4PU9PEtaA0Irv0d02ZdVSxhYAFVQQIDCCdQtU9TqifKUDQJVA2O53iZDeGy\nrw7mk3ZEb+8C+1PfkYMsGmUZks8FkenmzOYQbXcCgYEAgJDaDUBQwGl+dPR0HpuI\nMrID+P7l1WskOSONrJZ05LE136+c0EzIURRK16cksVbsNmDIsOmx+ZEbMu2lCX7P\nsr0Qci8/rhxqDgag1A/50X1B4G3mNO1J8mBMhDODDXdVOPx715zuyyQ8vEQ3XsNl\nxVSsPnTLHMSz90dkO3KOEZY=\n-----END PRIVATE KEY-----\n",
+  "client_email": "meme-ocr@meme-generator-233906.iam.gserviceaccount.com",
+  "client_id": "118250379626633718909",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/meme-ocr%40meme-generator-233906.iam.gserviceaccount.com"
+}
