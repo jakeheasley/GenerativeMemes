@@ -1,13 +1,13 @@
-from Markov import Scrape_Markov
-from Markov import Markov_Gen
+import Scrape_Markov
+import Markov_Gen
 
 # https://github.com/jsvine/markovify
 stop = False
 handles = []
 while not stop:
-    handle = input("input twitter handle: ")
+    handle = raw_input("input twitter handle: ")
     handles.append(handle)
-    yn = input("any more handles? (y/n) ")
+    yn = raw_input("any more handles? (y/n) ")
     stop = (yn == "n")
 
 handles_name = ""
@@ -24,6 +24,7 @@ for handle in handles:
 with open(handles_name + '.txt', 'w+') as f:
     for tweet in all_tweets:
         f.write(tweet + "\n")
+
 
 Markov_Gen.gen_markov(all_tweets, handles_name)
 

@@ -20,7 +20,7 @@ def get_all_tweets(screen_name):
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_key, access_secret)
     api = tweepy.API(auth)
-w
+
     # initialization of a list to hold all Tweets
     all_the_tweets = []
 
