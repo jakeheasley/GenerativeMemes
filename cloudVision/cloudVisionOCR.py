@@ -7,14 +7,13 @@ client = vision.ImageAnnotatorClient.from_service_account_file('/Users/richardgr
 img = input('enter filepath to image: ')
 
 
-def runOCR(image):
-    with open(image, 'rb') as inputImage:
-        content = inputImage.read()
+with open(img, 'rb') as inputImage:
+    content = inputImage.read()
 
-    vision_image = vision.types.Image(content=content)
-    text_response = client.text_detection(image=vision_image)
+vision_image = vision.types.Image(content=content)
+text_response = client.text_detection(image=vision_image)
 
-    alltext = [text.description for text in text_response.text_annotations]
+alltext = [text.description for text in text_response.text_annotations]
 
-    # print(text_response)
-    print(alltext[0])
+# print(text_response)
+print(alltext[0])
