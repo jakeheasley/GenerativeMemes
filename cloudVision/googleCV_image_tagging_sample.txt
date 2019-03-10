@@ -1,0 +1,224 @@
+/usr/local/bin/python3.7 /Users/richardgraham/Sources/GenerativeMemes/cloudVision/cloudVisionImageRecognizer.py
+enter filepath to image: /Volumes/GoogleDrive/My Drive/3. COMP 225/MEME VAULT/reddit_sub_dankmemes/Just_let_me_listen_to_all_star__ok.jpg
+web_detection {
+  web_entities {
+    entity_id: "/g/11fj45c_tw"
+    score: 0.7174999713897705
+    description: "Wojak"
+  }
+  web_entities {
+    entity_id: "/m/04wpw"
+    score: 0.708299994468689
+    description: "Meme"
+  }
+  web_entities {
+    entity_id: "/m/05fqp"
+    score: 0.707099974155426
+    description: "Non-player character"
+  }
+  web_entities {
+    entity_id: "/g/11bxjbk7vb"
+    score: 0.7069000005722046
+    description: "Pepe the Frog"
+  }
+  web_entities {
+    entity_id: "/m/025rxrz"
+    score: 0.6276000142097473
+    description: "Internet meme"
+  }
+  web_entities {
+    entity_id: "/m/09g6pyy"
+    score: 0.5453000068664551
+    description: "Know Your Meme"
+  }
+  web_entities {
+    entity_id: "/m/0jg24"
+    score: 0.5078999996185303
+    description: "Image"
+  }
+  web_entities {
+    entity_id: "/m/0447lv7"
+    score: 0.5062500238418579
+    description: "The Narrator"
+  }
+  web_entities {
+    entity_id: "/m/01mw1"
+    score: 0.46239998936653137
+    description: "Video Games"
+  }
+  web_entities {
+    entity_id: "/m/02szg2"
+    score: 0.424699991941452
+    description: "4chan"
+  }
+  full_matching_images {
+    url: "https://scontent-sea1-1.cdninstagram.com/vp/21608d9234e4f01e84398761dc42a3c8/5D1159E8/t51.2885-15/e35/52467473_2047896298843662_4807600662912644594_n.jpg?_nc_ht=scontent-sea1-1.cdninstagram.com&se=7&ig_cache_key=MTk4OTI5MjE4NjM3OTA2Mzc3Mg%3D%3D.2"
+  }
+  full_matching_images {
+    url: "https://scontent-amt2-1.cdninstagram.com/vp/43c385689a47b63644837e5adddcf9b5/5D1E0A76/t51.2885-15/e35/51700573_702217100180938_6699769030100734247_n.jpg?_nc_ht=scontent-amt2-1.cdninstagram.com"
+  }
+  full_matching_images {
+    url: "https://scontent-cdg2-1.cdninstagram.com/vp/babdd09029842b0985b698dd64a53c37/5D2029C4/t51.2885-15/e35/51974302_528758177613684_3050993214121736807_n.jpg?_nc_ht=scontent-cdg2-1.cdninstagram.com&ig_cache_key=MTk5MTIxNTIxNDQxNTU2OTIyMA%3D%3D.2"
+  }
+  full_matching_images {
+    url: "https://i.redd.it/bgc4m3geg7j21.png"
+  }
+  full_matching_images {
+    url: "https://scontent-bru2-1.cdninstagram.com/vp/188fe9abc830ca14f7ba75f56f3edf25/5D1F8C52/t51.2885-15/e35/51556825_2332615486974298_7661783821804162081_n.jpg?_nc_ht=scontent-bru2-1.cdninstagram.com"
+  }
+  full_matching_images {
+    url: "https://scontent-lhr3-1.cdninstagram.com/vp/31d0abe67ba1fdb30fad57e4906de720/5D2129AD/t51.2885-15/e35/51505221_304848303517104_2599668184140037804_n.jpg?_nc_ht=scontent-lhr3-1.cdninstagram.com"
+  }
+  full_matching_images {
+    url: "https://i.redd.it/pum3bjxx33j21.jpg"
+  }
+  full_matching_images {
+    url: "https://hugelolcdn.com/i/587723.jpg"
+  }
+  full_matching_images {
+    url: "https://leonardo.osnova.io/269e6132-3d14-7573-0784-c53b7bc4e5f0/-/scale_crop/630x600/center/-/format/webp/"
+  }
+  full_matching_images {
+    url: "https://i.redd.it/2yel4e8tp5j21.png"
+  }
+  partial_matching_images {
+    url: "https://i.redd.it/xbx0wnak0ej21.jpg"
+  }
+  partial_matching_images {
+    url: "https://k62.kn3.net/taringa/E/8/B/4/E/7/Ksht_LPS/0D5.jpg"
+  }
+  partial_matching_images {
+    url: "https://scontent-atl3-1.cdninstagram.com/vp/31a8ef6aa83fbfa95d088089a7817622/5D0AE33E/t51.2885-15/e35/52347598_310526502941219_3164597999188143422_n.jpg?_nc_ht=scontent-atl3-1.cdninstagram.com"
+  }
+  partial_matching_images {
+    url: "https://scontent-lax3-2.cdninstagram.com/vp/9f75043800757f0144a36bd9621ccce5/5D19C153/t51.2885-15/e35/52105090_1234854463305900_2118693610945192544_n.jpg?_nc_ht=scontent-lax3-2.cdninstagram.com"
+  }
+  partial_matching_images {
+    url: "http://wizardvarnish.com/wv/wp-content/uploads/2019/01/49173024_375118866570603_8444556924057288704_n-1024x976.jpg"
+  }
+  partial_matching_images {
+    url: "https://scontent-lht6-1.cdninstagram.com/vp/2ec8c898c80ac38809ea66c9acaf60a6/5D072032/t51.2885-15/e35/52474758_129074918150109_6558474685021694014_n.jpg?_nc_ht=scontent-lht6-1.cdninstagram.com&ig_cache_key=MTk5MTQ3NTM3ODY4NzcwNzA5MQ%3D%3D.2"
+  }
+  partial_matching_images {
+    url: "https://i.imgur.com/11v5DJ8g.jpg"
+  }
+  partial_matching_images {
+    url: "https://i.imgflip.com/2k0qad.jpg"
+  }
+  partial_matching_images {
+    url: "https://img.fireden.net/v/image/1544/37/1544379566786.jpg"
+  }
+  partial_matching_images {
+    url: "https://img.fireden.net/v/image/1544/38/1544381606661.png"
+  }
+  pages_with_matching_images {
+    url: "https://imgflip.com/memetemplate/154558741/NPC-Meme"
+    page_title: "<b>NPC Meme</b> Blank <b>Template</b> - Imgflip"
+    partial_matching_images {
+      url: "https://i.imgflip.com/2k0qad.jpg"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://imgflip.com/memesearch?q=npc"
+    page_title: "&quot;<b>npc</b>&quot; <b>Meme Templates</b> - Imgflip"
+    partial_matching_images {
+      url: "https://i.imgflip.com/2k0qad.jpg"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://imgflip.com/memesearch?q=npc&page=2"
+    page_title: "&quot;<b>npc</b>&quot; <b>Meme Templates</b> - Imgflip"
+    partial_matching_images {
+      url: "https://i.imgflip.com/2lewtu.jpg"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://imgflip.com/memesearch?q=meme&page=2"
+    page_title: "&quot;meme&quot; <b>Meme Templates</b> - Imgflip"
+    partial_matching_images {
+      url: "https://i.imgflip.com/2k0qad.jpg"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://www.picswe.com/pics/npc-meme-template-9b.html"
+    page_title: "<b>Npc Meme Template</b> | www.picswe.com"
+    partial_matching_images {
+      url: "https://i.imgflip.com/2k0qad.jpg"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://www.reddit.com/r/The_Donald/comments/9pf15z/npc_on_caravan/"
+    page_title: "<b>NPC</b> on Caravan : The_Donald - Reddit"
+    partial_matching_images {
+      url: "https://i.redd.it/trwmikuhi1t11.jpg"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://knowyourmeme.com/photos/1464125-npc-wojak"
+    page_title: "Fuck Pinterest | <b>NPC</b> Wojak | Know Your <b>Meme</b>"
+    partial_matching_images {
+      url: "https://i.kym-cdn.com/photos/images/newsfeed/001/464/125/56b.jpg"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://www.deviantart.com/tag/npcmeme"
+    page_title: "#npcmeme | Explore npcmeme on DeviantArt"
+    partial_matching_images {
+      url: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/ca63f028-8af6-44da-a58b-5c82b5431d58/dcv9vh7-9129b897-7a74-47d8-b15b-fc57f1c10134.png/v1/fill/w_367,h_350,q_70,strp/still_waiting_for_proof____by_captain_spleen_dcv9vh7-350t.jpg"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://www.reddit.com/r/dankmemes/comments/aufwqo/pls_stop_gaben/"
+    page_title: "Pls stop gaben : dankmemes - Reddit"
+    partial_matching_images {
+      url: "https://i.imgflip.com/2k0qad.jpg"
+    }
+  }
+  pages_with_matching_images {
+    url: "https://www.reddit.com/user/peterback"
+    page_title: "Peterback (u/Peterback) - Reddit"
+    full_matching_images {
+      url: "https://i.redd.it/2yel4e8tp5j21.png"
+    }
+  }
+  visually_similar_images {
+    url: "https://preview.redd.it/3pfdumotw1t11.png?width=737&auto=webp&s=323faddf63e289bab740b09c50ccbfe3005a1ba8"
+  }
+  visually_similar_images {
+    url: "https://i.imgflip.com/2l6a3a.jpg"
+  }
+  visually_similar_images {
+    url: "https://pics.me.me/i-believe-in-state-rights-me-too-new-take-on-37627677.png"
+  }
+  visually_similar_images {
+    url: "https://i.kym-cdn.com/photos/images/original/001/419/093/fac.png"
+  }
+  visually_similar_images {
+    url: "https://bbs.thegoyimknow.to/uploads/default/original/4X/7/e/f/7ef7c48cfcbd2fa8d4e77e5bfa115e5e5976abda.jpeg"
+  }
+  visually_similar_images {
+    url: "https://i.kym-cdn.com/photos/images/newsfeed/001/420/686/989.jpg"
+  }
+  visually_similar_images {
+    url: "https://i.redd.it/qvcuc9c0fzr11.jpg"
+  }
+  visually_similar_images {
+    url: "https://i.imgflip.com/2l6px2.jpg"
+  }
+  visually_similar_images {
+    url: "https://i.imgflip.com/2p9whc.jpg"
+  }
+  visually_similar_images {
+    url: "https://i0.wp.com/i.kym-cdn.com/photos/images/original/001/411/349/b2e.jpg"
+  }
+  best_guess_labels {
+    label: "npc meme template"
+    language_code: "en"
+  }
+}
+
+[label: "npc meme template"
+language_code: "en"
+]
+
+Process finished with exit code 0

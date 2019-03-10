@@ -24,4 +24,5 @@ def cleanOutput(proto):
     # googleCV returns 'RepeatedCompositeContainer' type objects. use the
     # google.protobuf.json_format module to clean this data into a dict
     # or something else usable by python
+    # https://stackoverflow.com/questions/19734617/protobuf-to-json-in-python
     return
