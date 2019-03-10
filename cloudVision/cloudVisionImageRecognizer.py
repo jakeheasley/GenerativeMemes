@@ -1,5 +1,6 @@
 from google.cloud import vision
 from google.cloud.vision import types
+from google.protobuf.json_format import MessageToDict
 
 client = vision.ImageAnnotatorClient.from_service_account_file('/Users/richardgraham/Sources/GenerativeMemes/cloudVision/Meme Generator-802734cd5cac.json')
 
@@ -15,3 +16,17 @@ print(recogResponse)
 
 recogContent = recogResponse.web_detection
 print(recogContent.best_guess_labels)
+
+foo = [recogContent.web_entities]
+# bar = str(foo)
+# baz = bar.split('\n')
+# print('foo: ')
+# print(foo)
+# print('bar: ')
+# print(bar)
+# print('baz: ')
+# print(baz)
+
+dict_obj = MessageToDict(foo[0])
+blah = dict_obj
+print(dict_obj)
