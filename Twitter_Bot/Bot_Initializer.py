@@ -1,6 +1,7 @@
-from Bot import Bot
+from Twitter_Bot.Bot import Bot
 import json
 
+# Minneapolis ID
 location = 23424977
 
 with open('twitter_credentials.json') as cred_data:
