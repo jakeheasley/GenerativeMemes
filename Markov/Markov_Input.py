@@ -5,9 +5,9 @@ import Markov_Gen
 stop = False
 handles = []
 while not stop:
-    handle = raw_input("input twitter handle: ")
+    handle = input("input twitter handle: ")
     handles.append(handle)
-    yn = raw_input("any more handles? (y/n) ")
+    yn = input("any more handles? (y/n) ")
     stop = (yn == "n")
 
 handles_name = ""
