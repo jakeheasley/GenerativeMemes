@@ -1,5 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont
 
+
 class Captioner:
     def __init__(self):
         self.font = ImageFont.truetype('./Impact.ttf', 18)

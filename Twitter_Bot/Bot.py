@@ -4,7 +4,7 @@ import re
 
 class Bot:
 
-    # Initialize bot with keys
+    # Initialize and authorize bot with keys
     def __init__(self, consumer_key, consumer_secret, access_key, access_secret):
         auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
         auth.set_access_token(access_key, access_secret)
@@ -12,11 +12,14 @@ class Bot:
 
     # Upload a text based tweet
     def upload_text(self, text):
-        self.api.update_status(text)
+        self.api.update_status(status=text)
 
-    # Upload a picture
-    def upload_media(self, filename):
-        self.api.update_with_media(filename)
+    # Upload a picture (text optional)
+    def upload_media(self, filename, text=None):
+        if text is None:
+            self.api.update_with_media(filename)
+        else:
+            self.api.update_with_media(filename, text)
 
     # Scrape tweets
     def get_tweets(self, handle):
@@ -54,13 +57,15 @@ class Bot:
 
         return just_tweets
 
-    # Returns list of trends from a location
+    # Returns list of trends based on location
     def get_trends(self, location):
-        return self.api.trends_place(location)
+        trends = self.api.trends_place(location)
+        return trends
 
     # Helper function that tells how many queries we have left per hour
     def rate_status(self):
         status = self.api.rate_limit_status()
+        print(status)
         remaining = status['resources']['feedback']['/feedback/show/:id']['remaining']
         return remaining
 
