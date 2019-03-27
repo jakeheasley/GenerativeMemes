@@ -53,7 +53,7 @@ def get_all_tweets(screen_name):
     outtweets = []
     just_tweets = []
     for tweet in all_the_tweets:
-        tweet_text = re.sub("https:.*$", "", str(tweet.full_text.encode('utf-8')))
+        tweet_text = re.sub("https:.*$", "", tweet.full_text)
         tweet_text = re.sub("&amp", "&", tweet_text)
         just_tweets.append(tweet_text)
         outtweets.append([tweet.id_str, tweet.created_at, tweet_text])
