@@ -2,7 +2,7 @@ from google.cloud import vision
 from google.cloud.vision import types
 from google.protobuf.json_format import MessageToDict
 
-client = vision.ImageAnnotatorClient.from_service_account_file('/Users/richardgraham/Sources/GenerativeMemes/cloudVision/Meme Generator-802734cd5cac.json')
+client = vision.ImageAnnotatorClient.from_service_account_file('Meme Generator-802734cd5cac.json')
 
 # img = '/Volumes/GoogleDrive/My Drive/3. COMP 225/MEME VAULT/fish joint.jpg'
 img = input('enter filepath to image: ')

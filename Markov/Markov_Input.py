@@ -5,9 +5,9 @@ import Markov_Gen
 stop = False
 handles = []
 while not stop:
-    handle = raw_input("input twitter handle: ")
+    handle = input("input twitter handle: ")
     handles.append(handle)
-    yn = raw_input("any more handles? (y/n) ")
+    yn = input("any more handles? (y/n) ")
     stop = (yn == "n")
 
 handles_name = ""
@@ -21,10 +21,9 @@ for handle in handles:
     Scrape_Markov.get_all_tweets(handle)
     all_tweets.extend(Scrape_Markov.return_tweets())
 
-with open(handles_name + '.txt', 'w+') as f:
+with open(handles_name + '.txt', 'w+', encoding = "utf-8") as f:
     for tweet in all_tweets:
         f.write(tweet + "\n")
 
 
 Markov_Gen.gen_markov(all_tweets, handles_name)
-
