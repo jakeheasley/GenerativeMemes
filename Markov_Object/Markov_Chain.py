@@ -3,7 +3,10 @@ import markovify
 
 class Chain:
 
-    # Initialize a new Markov chain
+    # Initialize a new Markov chain:
+    # chars = max characters in sentence
+    # tries is number of attempts where Markovify tries to get optimal ratio
+    # ratio = decimal of desired similarity to original sentence
     def __init__(self, chars, tries, ratio, filepath):
         with open(filepath) as f:
             text = f.read()
