@@ -18,15 +18,3 @@ recogContent = recogResponse.web_detection
 print(recogContent.best_guess_labels)
 
 foo = [recogContent.web_entities]
-# bar = str(foo)
-# baz = bar.split('\n')
-# print('foo: ')
-# print(foo)
-# print('bar: ')
-# print(bar)
-# print('baz: ')
-# print(baz)
-
-dict_obj = MessageToDict(foo[0])
-blah = dict_obj
-print(dict_obj)
