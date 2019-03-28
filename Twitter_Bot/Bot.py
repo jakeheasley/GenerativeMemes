@@ -50,7 +50,8 @@ class Bot:
         for tweet in all_the_tweets:
 
             # Removing unwanted links at end of tweets and changing amp to &
-            tweet_text = re.sub("https:.*$", "", tweet.full_text.encode('utf-8'))
+
+            tweet_text = re.sub("https:.*$", "", tweet.full_text)
             tweet_text = re.sub("&amp", "&", tweet_text)
 
             just_tweets.append(tweet_text)

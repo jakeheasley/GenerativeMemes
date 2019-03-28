@@ -14,6 +14,10 @@ with open('twitter_credentials.json') as cred_data:
 
 # instantiate bot
 bot1 = Bot(consumer_key, consumer_secret, access_key, access_secret)
+tweets = bot1.get_tweets("inthehands")
+print(tweets)
+
+'''
 bot1.rate_status()
 
 # trends testing
@@ -31,3 +35,4 @@ for trend in trends:
     print(trend['name'])
     if trend in test:
         print("yes")
+'''
