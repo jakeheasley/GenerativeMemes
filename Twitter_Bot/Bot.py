@@ -1,4 +1,5 @@
 import tweepy
+from tweepy import Cursor
 import re
 
 
@@ -21,47 +22,44 @@ class Bot:
         else:
             self.api.update_with_media(filename, text)
 
-    # Scrape tweets
-    def get_tweets(self, handle):
+    # Scrape tweets from specific user
+    def get_user_tweets(self, handle):
         # initialization of a list to hold all Tweets
-        all_the_tweets = []
+        tweets = []
+        timeline = Cursor(self.api.user_timeline, screen_name=handle,
+                          tweet_mode='extended',
+                          exclude_replies=True,
+                          include_rts=False)
+        return self.clean_tweets(timeline)
 
-        # Initial set of 200 tweets
-        new_tweets = self.api.user_timeline(screen_name=handle, count=200, include_rts=False, tweet_mode='extended')
-        all_the_tweets.extend(new_tweets)
+    # Scrape tweets from specific search term
+    def search_tweets(self, search_term):
+        # initialization of a list to hold all Tweets
+        search_term = search_term + "-filter:retweets"
+        search_tweets = Cursor(self.api.search, q=search_term,
+                               tweet_mode='extended',
+                               exclude_replies=True)
+        return self.clean_tweets(search_tweets)
 
-        # One less than id of oldest tweet
-        oldest_tweet = all_the_tweets[-1].id - 1
-
-        # Scraping tweets
-        while len(new_tweets) > 0:
-            # The max_id param will be used subsequently to prevent duplicates
-            new_tweets = self.api.user_timeline(screen_name=handle,
-                                                count=200, max_id=oldest_tweet,
-                                                tweet_mode='extended',
-                                                include_rts=False)
-            # save most recent tweets
-            all_the_tweets.extend(new_tweets)
-
-            # id is updated to oldest tweet - 1 to keep track
-            oldest_tweet = all_the_tweets[-1].id - 1
-
-        just_tweets = []
-        for tweet in all_the_tweets:
-
-            # Removing unwanted links at end of tweets and changing amp to &
-
+    # Returns list of tweets that have been formatted
+    def clean_tweets(self, timeline):
+        tweets = []
+        for tweet in timeline.items(500):
             tweet_text = re.sub("https:.*$", "", tweet.full_text)
             tweet_text = re.sub("&amp", "&", tweet_text)
+            tweets.append(tweet_text)
 
-            just_tweets.append(tweet_text)
+        return tweets
 
-        return just_tweets
-
-    # Returns list of trends based on location
+    # Returns dictionary of hashtag trends and respective search queries
     def get_trends(self, location):
         trends = self.api.trends_place(location)
-        return trends
+        trend_search = {}
+        for trend in trends[0]['trends']:
+            if "#" in trend['name']:
+                trend_search[trend['name']] = trend['query']
+            break
+        return trend_search
 
     # Helper function that tells how many queries we have left per hour
     def rate_status(self):
