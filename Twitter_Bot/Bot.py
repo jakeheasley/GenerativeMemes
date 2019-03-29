@@ -58,7 +58,6 @@ class Bot:
         for trend in trends[0]['trends']:
             if "#" in trend['name']:
                 trend_search[trend['name']] = trend['query']
-            break
         return trend_search
 
     # Helper function that tells how many queries we have left per hour

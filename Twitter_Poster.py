@@ -9,8 +9,11 @@ chars = 140
 tries = 100
 ratio = .5
 handle = "inspire_us"
+
+# Geotag for Minneapolis
 location = 23424977
 
+# Finding filepath for twitter_credentials.json
 base_path = Path("twitter_credentials.json").parent
 file_path = (base_path / "../GenerativeMemes/Twitter_Bot/twitter_credentials.json").resolve()
 
@@ -31,6 +34,7 @@ def make_trend():
     trend = ""
     for x in bot.get_trends(location).values():
         trend = x
+        break
 
     tweet_list = bot.search_tweets(trend)
     with open(trend + '_tweets.txt', 'w+') as f:
