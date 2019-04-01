@@ -21,9 +21,6 @@ data = scrape.return_tweets()
 
 #insertion statement query
 sql_insert = """insert ignore into content (source_text,author) values (%s,%s); """
-
 mycursor.executemany(sql_insert,data)
 mydb.commit()
-
-
 mycursor.close()

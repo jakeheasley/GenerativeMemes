@@ -37,7 +37,7 @@ def make_trend():
         break
 
     tweet_list = bot.search_tweets(trend)
-    with open(trend + '_tweets.txt', 'w+') as f:
+    with open(trend + '_tweets.txt', 'w+',encoding = "utf-8") as f:
         for tweet in tweet_list:
             f.write(tweet + "\n")
 
@@ -50,7 +50,7 @@ def make_trend():
 
 def make_tweet():
     tweet_list = bot.get_user_tweets(handle)
-    with open(handle + '_tweets.txt', 'w+') as f:
+    with open(handle + '_tweets.txt', 'w+', encoding = "utf-8") as f:
         for tweet in tweet_list:
             f.write(tweet + "\n")
     file_name = handle + "_tweets.txt"
@@ -75,4 +75,3 @@ for chain in markov_tweet:
     bot.upload_text(chain)
 
 os.remove(file_path)
-

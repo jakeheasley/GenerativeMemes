@@ -8,7 +8,7 @@ class Chain:
     # tries is number of attempts where Markovify tries to get optimal ratio
     # ratio = decimal of desired similarity to original sentence
     def __init__(self, chars, tries, ratio, filepath):
-        with open(filepath) as f:
+        with open(filepath, encoding = "utf-8") as f:
             text = f.read()
 
         self.filepath = filepath
@@ -30,7 +30,7 @@ class Chain:
 
     # Functions that update variable values
     def update_text(self, filepath):
-        with open(filepath) as f:
+        with open(filepath, encoding = "utf-8") as f:
             text = f.read()
         self.model = markovify.NewlineText(text)
 
@@ -55,4 +55,3 @@ class Chain:
 
     def get_filepath(self):
         return self.filepath
-
