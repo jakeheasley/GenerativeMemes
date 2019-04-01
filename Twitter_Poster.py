@@ -4,6 +4,7 @@ from pathlib import Path
 import json
 import random
 import os
+import TwitterSQL as twit_sql
 
 chars = 140
 tries = 100
@@ -58,11 +59,14 @@ def make_tweet():
     file_path = (base_path / file_name).resolve()
     return file_path
 
+#
+# if bool(random.getrandbits(1)):
+#     file_path = make_trend()
+# else:
+    # file_path = make_tweet()
+# twit_sql.Insertion(handle)
+file_path = twit_sql.Query(handle)
 
-if bool(random.getrandbits(1)):
-    file_path = make_trend()
-else:
-    file_path = make_tweet()
 
 chain = Chain(chars=chars,
               tries=tries,

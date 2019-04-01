@@ -4,7 +4,7 @@ import sys
 import re
 
 
-with open('twitter_credentials.json') as cred_data:
+with open('Twitter_Bot/twitter_credentials.json') as cred_data:
     info = json.load(cred_data)
     consumer_key = info['CONSUMER_KEY']
     consumer_secret = info['CONSUMER_SECRET']
