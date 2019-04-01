@@ -55,7 +55,9 @@ def get_all_tweets(screen_name):
     for tweet in all_the_tweets:
         tweet_text = re.sub("https:.*$", "", tweet.full_text)
         tweet_text = re.sub("&amp", "&", tweet_text)
-        just_tweets.append(tweet_text)
+
+        #modifiying to create easier insertion into mysql database
+        just_tweets.append((tweet_text,screen_name))
         outtweets.append([tweet.id_str, tweet.created_at, tweet_text])
 
     all_the_tweets = just_tweets

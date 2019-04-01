@@ -1,7 +1,7 @@
 import mysql.connector as mysql
 import Scrape_Markov as scrape
 
-
+#connect to database
 mydb = mysql.connect(
     host = "localhost",
     port = 25565,
@@ -12,28 +12,18 @@ mydb = mysql.connect(
 
 mycursor = mydb.cursor()
 
-i = 0
+Author = input()
 
 #get all tweets from Inspire_us
-scrape.get_all_tweets("Inspire_us")
+scrape.get_all_tweets(Author)
 data = scrape.return_tweets()
 
+
 #insertion statement query
-sql_insert = "insert into test (va, test_id) values (%s,%s)"
+sql_insert = """insert ignore into content (source_text,author) values (%s,%s); """
+
+mycursor.executemany(sql_insert,data)
+mydb.commit()
 
 
-#creating row for each tweet
-for x in data:
-    tuple = (x,i)
-    mycursor.execute(sql_insert,tuple)
-    mydb.commit()
-    i = i + 1
-
-
-
-mycursor.execute("select va from test;")
-
-#writing the query into a file
-with open("SQLQueryText.txt", "w", encoding = "utf-8") as text_file:
-    for x in mycursor:
-        text_file.write(x[0]+"\n")
+mycursor.close()
