@@ -2,7 +2,7 @@ import mysql.connector as mysql
 import Markov.Scrape_Markov as scrape
 from pathlib import Path
 
-
+#method for inserting into the database
 def Insertion(handle):
     #connect to database
     mydb = mysql.connect(
@@ -36,9 +36,9 @@ def Query(handle):
     query = """select source_text from content where author =  %s;"""
     mycursor.execute(query, (handle,))
 
-    temp = mycursor.fetchone()
-    if (temp == None):
-        self.Insertion(handle)
+
+    #do not know if should make everytime we query or just when it is empty
+    Insertion(handle)
 
     with open("query.txt", "w+",encoding = "utf-8") as f:
         for x in mycursor:

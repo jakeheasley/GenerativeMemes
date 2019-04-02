@@ -5,6 +5,9 @@ import json
 import random
 import os
 import TwitterSQL as twit_sql
+from datetime import datetime
+
+before = datetime.now()
 
 chars = 140
 tries = 100
@@ -16,7 +19,7 @@ location = 23424977
 
 # Finding filepath for twitter_credentials.json
 base_path = Path("twitter_credentials.json").parent
-file_path = (base_path / "../GenerativeMemes/Twitter_Bot/twitter_credentials.json").resolve()
+file_path = (base_path / "../Prototype/Twitter_Bot/twitter_credentials.json").resolve()
 
 with open(file_path) as cred_data:
     info = json.load(cred_data)
@@ -59,12 +62,6 @@ def make_tweet():
     file_path = (base_path / file_name).resolve()
     return file_path
 
-#
-# if bool(random.getrandbits(1)):
-#     file_path = make_trend()
-# else:
-    # file_path = make_tweet()
-# twit_sql.Insertion(handle)
 file_path = twit_sql.Query(handle)
 
 
@@ -79,3 +76,6 @@ for chain in markov_tweet:
     bot.upload_text(chain)
 
 os.remove(file_path)
+after = datetime.now()
+
+print(after-before)
