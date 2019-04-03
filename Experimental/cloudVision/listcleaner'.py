@@ -1,4 +1,6 @@
-recogResponse.web_detection.web_entities:
+"""output from GoogleCV web detection:"""
+
+"""recogResponse.web_detection.web_entities:
 
 [entity_id: "/m/03bfb"
 score: 0.6611999869346619
@@ -30,4 +32,4 @@ description: "Work of art"
 , entity_id: "/m/02y_3dj"
 score: 0.28929999470710754
 description: "Sadness"
-]
+]"""
