@@ -1,3 +1,7 @@
+# testing/prototyping for cvImageProcessor.py.
+#
+# Don't look here for functionality.
+
 from google.cloud import vision
 from google.cloud.vision import types
 
