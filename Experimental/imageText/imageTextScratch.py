@@ -1,3 +1,5 @@
+# don't use this it's a bogus scratch file
+
 from PIL import Image, ImageDraw, ImageFont
 
 img = Image.new('RGB', (60, 30), color='red')
