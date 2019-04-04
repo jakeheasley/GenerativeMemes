@@ -6,11 +6,11 @@ from pathlib import Path
 def Insertion(handle):
     #connect to database
     mydb = mysql.connect(
-        host = "localhost",
-        port = 25565,
-        user = "meme",
-        passwd = "software_dev",
-        database = "meme"
+        host = "softwaredev.caybzpwuhc8n.us-east-2.rds.amazonaws.com",
+        port = 6666,
+        user = "root",
+        passwd = "paulsmemes",
+        database = "Memes"
     )
 
     mycursor = mydb.cursor()
@@ -25,11 +25,11 @@ def Insertion(handle):
 def Query(handle):
     #connect to database
     mydb = mysql.connect(
-        host = "localhost",
-        port = 25565,
-        user = "meme",
-        passwd = "software_dev",
-        database = "meme"
+        host = "softwaredev.caybzpwuhc8n.us-east-2.rds.amazonaws.com",
+        port = 6666,
+        user = "root",
+        passwd = "paulsmemes",
+        database = "Memes"
     )
 
     mycursor = mydb.cursor()

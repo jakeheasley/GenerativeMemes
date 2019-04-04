@@ -12,7 +12,7 @@ before = datetime.now()
 chars = 140
 tries = 100
 ratio = .5
-handle = "inspire_us"
+handle = "Inspire_us"
 
 # Geotag for Minneapolis
 location = 23424977
@@ -33,7 +33,8 @@ bot = Bot(consumer_key=consumer_key,
           access_key=access_key,
           access_secret=access_secret)
 
-
+# From trends on twitter this creates a file in the form
+# *trend*_tweets.txt that is later used for Markov and returns the file path
 def make_trend():
     trend = ""
     for x in bot.get_trends(location).values():
@@ -63,8 +64,9 @@ def make_tweet():
     return file_path
 
 file_path = twit_sql.Query(handle)
-
-
+# file_path = "query.txt"
+after = datetime.now()
+print("Time for checkpoint 1: "+after-before)
 chain = Chain(chars=chars,
               tries=tries,
               ratio=ratio,
@@ -78,4 +80,4 @@ for chain in markov_tweet:
 os.remove(file_path)
 after = datetime.now()
 
-print(after-before)
+print("total time for program "+after-before)
