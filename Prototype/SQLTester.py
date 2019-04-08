@@ -27,5 +27,5 @@ bot = Bot(consumer_key=consumer_key,
           access_secret=access_secret)
 
 temp = bot.get_user_tweets("Inspire_us")
-print(temp)
-sql.insertion(temp)
+print(temp[1])
+# sql.insertion(temp)
