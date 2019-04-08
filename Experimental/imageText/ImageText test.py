@@ -2,6 +2,8 @@ import imageText as it
 from PIL import Image
 import pathlib
 
+# example usage for imageText module
+
 imgPath = pathlib.Path("./a_Meme.jpg")
 
 # theMeme = Image.open(imgPath, 'r')
