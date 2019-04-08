@@ -42,8 +42,7 @@ sql = SQL(host="softwaredev.caybzpwuhc8n.us-east-2.rds.amazonaws.com",
           database="Memes")
 
 
-# From trends on twitter this creates a file in the form
-# *trend*_tweets.txt that is later used for Markov and returns the file path
+# Get trend information
 def make_trend():
     trend = ""
     for x in bot.get_trends(location).values():
@@ -59,14 +58,10 @@ def make_tweet():
 
 
 def database_insertion(tweet_list):
-    sql.Insertion(tweet_list)
+    sql.insertion(tweet_list)
 
 
-
-
-
-
-sql_list = sql.Query()
+sql_list = []
 chain = Chain(chars=chars,
               tries=tries,
               ratio=ratio,

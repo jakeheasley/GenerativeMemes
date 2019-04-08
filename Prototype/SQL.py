@@ -1,6 +1,4 @@
 import mysql.connector as mysql
-import Markov.Scrape_Markov as scrape
-from pathlib import Path
 
 class SQL:
     def __init__(self, host, port, username, password, database):
@@ -21,10 +19,7 @@ class SQL:
 
         self.cursor = self.db.cursor()
 
-    def set_handle(self,handle):
-        self.handle  = handle
-
-    def Insertion(self, list_tweets, trend=None):
+    def insertion(self, list_tweets):
         temp = []
         for x in list_tweets:
             temp.append((x,self.handle))
@@ -32,13 +27,21 @@ class SQL:
         self.cursor.executemany(sql_insert, temp)
         self.db.commit()
 
-    def Query(self):
-        query = """select source_text from content where author =  %s;"""
-        self.cursor.execute(query, (self.handle,))
-        temp = []
+    def author_query(self, author):
+        query = """select source_text from content where author =  %s"""
+        self.cursor.execute(query, (author,))
+        query_list = []
         for x in self.cursor:
-            temp.append(x[0])
-        return(temp)
+            query_list.append(x[0])
+        return query_list
 
-    def Close(self):
+    def trend_query(self, trend):
+        query = """select source_text from content where trend =  %s;"""
+        self.cursor.execute(query, (trend,))
+        query_list = []
+        for x in self.cursor:
+            query_list.append(x[0])
+        return query_list
+
+    def close(self):
         self.cursor.close()
