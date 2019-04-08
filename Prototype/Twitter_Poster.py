@@ -6,6 +6,7 @@ import random
 import os
 import TwitterSQL as twit_sql
 from datetime import datetime
+from SQL import SQL
 
 before = datetime.now()
 
@@ -63,10 +64,18 @@ def make_tweet():
     file_path = (base_path / file_name).resolve()
     return file_path
 
-file_path = twit_sql.Query(handle)
-# file_path = "query.txt"
+
+sql = SQL(host = "softwaredev.caybzpwuhc8n.us-east-2.rds.amazonaws.com", port = 6666, username = "root", password = "paulsmemes",database = "Memes")
+
+sql.set_handle(handle)
+sql.Insertion()
+filepath = sql.Query()
+sql.Close()
+
 after = datetime.now()
-print("Time for checkpoint 1: "+after-before)
+# print("Time for checkpoint 1: "+after-before)
+
+
 chain = Chain(chars=chars,
               tries=tries,
               ratio=ratio,
@@ -80,4 +89,4 @@ for chain in markov_tweet:
 os.remove(file_path)
 after = datetime.now()
 
-print("total time for program "+after-before)
+# print("total time for program "+after-before)
