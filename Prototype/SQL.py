@@ -24,30 +24,21 @@ class SQL:
     def set_handle(self,handle):
         self.handle  = handle
 
-    def Insertion(self):
-        scrape.get_all_tweets(self.handle)
-        data = scrape.return_tweets()
+    def Insertion(self, list_tweets):
+        temp = []
+        for x in list_tweets:
+            temp.append((x,self.handle))
         sql_insert = """insert ignore into content (source_text, author) values (%s,%s);"""
-        self.cursor.executemany(sql_insert, data)
+        self.cursor.executemany(sql_insert, temp)
         self.db.commit()
 
     def Query(self):
         query = """select source_text from content where author =  %s;"""
         self.cursor.execute(query, (self.handle,))
-        
-
-        #Should we insert everytime to make sure that there is source stuff from that author/handle?
-
-        with open("query.txt", "w+",encoding = "utf-8") as f:
-            for x in self.cursor:
-                f.write(x[0]+"\n")
-
-        file_name = "query.txt"
-        base_path = Path(file_name).parent
-        file_path = (base_path / file_name).resolve()
-        return file_path
-
-
+        temp = []
+        for x in self.cursor:
+            temp.append(x[0])
+        return(temp)
 
     def Close(self):
         self.cursor.close()
