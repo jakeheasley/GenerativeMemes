@@ -2,7 +2,7 @@ from Twitter_Bot.Bot import Bot
 from Markov_Object.Markov_Chain import Chain
 from pathlib import Path
 import json
-import os
+import random
 from datetime import datetime
 from SQL import SQL
 
@@ -51,17 +51,23 @@ def make_trend():
 
     tweet_list = bot.search_tweets(trend)
     database_insertion(tweet_list)
+    return sql.trend_query(trend)
 
 
 def make_tweet():
     database_insertion(tweet_list=bot.get_user_tweets(handle))
+    return sql.author_query(handle)
 
 
 def database_insertion(tweet_list):
     sql.insertion(tweet_list)
 
 
-sql_list = []
+if bool(random.getrandbits(1)):
+    sql_list = make_trend()
+else:
+    sql_list = make_tweet()
+
 chain = Chain(chars=chars,
               tries=tries,
               ratio=ratio,
@@ -72,7 +78,4 @@ markov_tweet = chain.make_sent(1)
 for chain in markov_tweet:
     bot.upload_text(chain)
 
-os.remove(file_path)
-after = datetime.now()
 
-# print("total time for program "+after-before)

@@ -19,12 +19,9 @@ class SQL:
 
         self.cursor = self.db.cursor()
 
-    def insertion(self, list_tweets):
-        temp = []
-        for x in list_tweets:
-            temp.append((x,self.handle))
-        sql_insert = """insert ignore into content (source_text, author) values (%s,%s);"""
-        self.cursor.executemany(sql_insert, temp)
+    def insertion(self, tweet_tuple):
+        sql_insert = """insert ignore into Tweets (Author, Tweet, id, trend, date_pulled, tweet_date) values (%s,%s,%s,%s,%s,%s);"""
+        self.cursor.executemany(sql_insert, tweet_tuple)
         self.db.commit()
 
     def author_query(self, author):
