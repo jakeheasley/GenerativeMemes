@@ -25,7 +25,7 @@ class SQL:
         self.db.commit()
 
     def author_query(self, author):
-        query = """select source_text from content where author =  %s"""
+        query = """select Tweet from Tweets where author =  %s"""
         self.cursor.execute(query, (author,))
         query_list = []
         for x in self.cursor:
@@ -33,7 +33,7 @@ class SQL:
         return query_list
 
     def trend_query(self, trend):
-        query = """select source_text from content where trend =  %s;"""
+        query = """select Tweet from Tweets where trend =  %s;"""
         self.cursor.execute(query, (trend,))
         query_list = []
         for x in self.cursor:

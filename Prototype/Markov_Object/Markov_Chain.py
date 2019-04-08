@@ -9,7 +9,7 @@ class Chain:
     # ratio = decimal of desired similarity to original sentence
     def __init__(self, chars, tries, ratio, tweet_list):
 
-        self.text = tweet_list
+        self.text = "\n".join(tweet_list)
 
         # Sentences are shown by new lines
         self.model = markovify.NewlineText(self.text)
