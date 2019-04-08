@@ -1,37 +1,63 @@
 from google.cloud import vision
+from pathlib import Path
 
 
-client = vision.ImageAnnotatorClient.from_service_account_file('/Users/richardgraham/Sources/GenerativeMemes/cloudVision/Meme Generator-802734cd5cac.json')
+class CV:
 
+    def __init__(self):
+        credential_path = Path('./Meme Generator-802734cd5cac.json')
+        # self.client = vision.ImageAnnotatorClient.from_service_account_file('/Users/richardgraham/Sources/GenerativeMemes/cloudVision/Meme Generator-802734cd5cac.json')
+        self.client = vision.ImageAnnotatorClient.from_service_account_file(credential_path)
 
-def openImage(path):
-    """open a given file and return its data for processing"""
-    with open(path, 'rb') as imageFile:
-        image_data = imageFile.read()
-    return image_data
+    def openImage(self, path):
+        """open a given file and return its data for processing"""
+        with open(path, 'rb') as imageFile:
+            image_data = imageFile.read()
+        vision_image = vision.types.Image(content=image_data)
+        return vision_image
 
+    def runOCR(self, imgdata, mode='text'):
+        """takes in image data, sends it to Google CV for OCR, returns text in the image
+        @:param imgdata: google.cloud.vision.types.Image object
+        @:param mode: can be either 'text' or 'full'.
+        text (default) returns only the OCR text. full returns OCR text accompanied by bounding box.
+        @:return for 'text' mode: a string of all text recognized in the image
+        @:return for 'full' mode: a protobuf (?) object containing recognized text
+        and the coordinates of its bounding box in the image. useful for replacing text."""
 
-def runOCR(imgdata):
-    """takes in image data, sends it to Google CV for OCR, returns text in the image"""
-    vision_image = vision.types.Image(content=imgdata)
-    text_response = client.text_detection(image=vision_image)
-    output = [text.description for text in text_response.text_annotations]
-    return output[0]
+        # ToDo: format protobuf output for 'full' mode so that it doesn't deliver
+        #  4000 lines of information that we don't need.
 
+        text_response = self.client.text_detection(image=imgdata)
+        text_only = [text.description for text in text_response.text_annotations]
+        if mode == 'text':
+            return text_only[0]
+        elif mode == 'full':
+            return text_response
 
-def findText(imagefile):
-    """wrapper function for runOCR and openImage to be run from one function call."""
-    pic = openImage(imagefile)
-    return runOCR(pic)
+    def tagImage(self, imgdata, mode='brief'):
+        """takes in image data, sends it to Google CV for image recognition,
+        returns list of tagged objects.
+        @:param imgdata: google.cloud.vision.types.Image object.
+        @:param mode: can either be 'brief' or 'full'.
+        'brief' (default) returns only the best guess at what the image is and the language if recognized.
+        'full' returns a full list of tags and their match scores
+        along with URLs and page names of locations with exact matches, partial matches, and visually similar images.
+        Some of these may be useful for database entry."""
+        recog_response = self.client.web_detection(image=imgdata)
+        output = recog_response.web_detection.best_guess_labels
+        if mode == 'brief':
+            return output
+        elif mode == 'full':
+            return recog_response
 
-
-def cleanOutput(self, proto):
-    """receives google protocol buffer object containing descriptive information
-    about an image, converts the protobuf info to lists and strings for Python to
-    use."""
-    # TODO: format web_entities field to prepare for database entry
-    # googleCV returns 'RepeatedCompositeContainer' type objects. use the
-    # google.protobuf.json_format module to clean this data into a dict
-    # or something else usable by python
-    # https://stackoverflow.com/questions/19734617/protobuf-to-json-in-python
-    return
+    def cleanOutput(self, proto):
+        """receives google protocol buffer object containing descriptive information
+        about an image, converts the protobuf info to lists and strings for Python to
+        use."""
+        # TODO: format web_entities field to prepare for database entry
+        # googleCV returns 'RepeatedCompositeContainer' type objects. use the
+        # google.protobuf.json_format module to clean this data into a dict
+        # or something else usable by python
+        # https://stackoverflow.com/questions/19734617/protobuf-to-json-in-python
+        return

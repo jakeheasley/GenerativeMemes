@@ -19,5 +19,5 @@ text_response = client.text_detection(image=vision_image)
 
 alltext = [text.description for text in text_response.text_annotations]
 
-# print(text_response)
+print(text_response)
 print(alltext[0])

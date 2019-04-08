@@ -16,9 +16,13 @@ with open(img, 'rb') as inputImage:
 
 visionImage = vision.types.Image(content=content)
 recogResponse = client.web_detection(image=visionImage)
+print("#########################################################")
 print(recogResponse)
+print("#########################################################")
 
 recogContent = recogResponse.web_detection
+print("#########################################################")
 print(recogContent.best_guess_labels)
+print("#########################################################")
 
 foo = [recogContent.web_entities]
