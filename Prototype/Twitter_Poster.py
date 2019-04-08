@@ -2,9 +2,7 @@ from Twitter_Bot.Bot import Bot
 from Markov_Object.Markov_Chain import Chain
 from pathlib import Path
 import json
-import random
 import os
-import TwitterSQL as twit_sql
 from datetime import datetime
 from SQL import SQL
 
@@ -22,6 +20,7 @@ location = 23424977
 base_path = Path("twitter_credentials.json").parent
 file_path = (base_path / "../Prototype/Twitter_Bot/twitter_credentials.json").resolve()
 
+# Loads twitter credentials from json file
 with open(file_path) as cred_data:
     info = json.load(cred_data)
     consumer_key = info['CONSUMER_KEY']
@@ -29,10 +28,19 @@ with open(file_path) as cred_data:
     access_key = info['ACCESS_TOKEN']
     access_secret = info['ACCESS_SECRET']
 
+# Creates twitter_bot that connects to twitter account
 bot = Bot(consumer_key=consumer_key,
           consumer_secret=consumer_secret,
           access_key=access_key,
           access_secret=access_secret)
+
+# Connects to SQL database
+sql = SQL(host="softwaredev.caybzpwuhc8n.us-east-2.rds.amazonaws.com",
+          port=6666,
+          username="root",
+          password="paulsmemes",
+          database="Memes")
+
 
 # From trends on twitter this creates a file in the form
 # *trend*_tweets.txt that is later used for Markov and returns the file path
@@ -43,43 +51,26 @@ def make_trend():
         break
 
     tweet_list = bot.search_tweets(trend)
-    with open(trend + '_tweets.txt', 'w+',encoding = "utf-8") as f:
-        for tweet in tweet_list:
-            f.write(tweet + "\n")
-
-    file_name = trend + "_tweets.txt"
-
-    base_path = Path(file_name).parent
-    file_path = (base_path / file_name).resolve()
-    return file_path
+    database_insertion(tweet_list)
 
 
 def make_tweet():
-    tweet_list = bot.get_user_tweets(handle)
-    with open(handle + '_tweets.txt', 'w+', encoding = "utf-8") as f:
-        for tweet in tweet_list:
-            f.write(tweet + "\n")
-    file_name = handle + "_tweets.txt"
-    base_path = Path(file_name).parent
-    file_path = (base_path / file_name).resolve()
-    return file_path
+    database_insertion(tweet_list=bot.get_user_tweets(handle))
 
 
-sql = SQL(host = "softwaredev.caybzpwuhc8n.us-east-2.rds.amazonaws.com", port = 6666, username = "root", password = "paulsmemes",database = "Memes")
-
-sql.set_handle(handle)
-sql.Insertion()
-filepath = sql.Query()
-sql.Close()
-
-after = datetime.now()
-# print("Time for checkpoint 1: "+after-before)
+def database_insertion(tweet_list):
+    sql.Insertion(tweet_list)
 
 
+
+
+
+
+sql_list = sql.Query()
 chain = Chain(chars=chars,
               tries=tries,
               ratio=ratio,
-              filepath=file_path)
+              tweet_list=sql_list)
 
 markov_tweet = chain.make_sent(1)
 

@@ -1,6 +1,7 @@
 import tweepy
 from tweepy import Cursor
 import re
+import datetime
 
 
 class Bot:
@@ -41,14 +42,15 @@ class Bot:
                                exclude_replies=True)
         return self.clean_tweets(search_tweets)
 
-    # Returns list of tweets that have been formatted
-    def clean_tweets(self, timeline):
-        tweets = []
+    # Returns tuple-list of tweets that have been formatted
+    def clean_tweets(self, timeline, trend=None):
+        tweets = [()]
+        date = datetime.datetime.today()
+        date = date.strftime('%Y-%m-%d')
         for tweet in timeline.items(500):
             tweet_text = re.sub("https:.*$", "", tweet.full_text)
             tweet_text = re.sub("&amp", "&", tweet_text)
-            tweets.append(tweet_text)
-
+            tweets.append((tweet.author, tweet_text, tweet.id_str, trend, date, tweet.created_at))
         return tweets
 
     # Returns dictionary of hashtag trends and respective search queries

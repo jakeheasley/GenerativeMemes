@@ -7,14 +7,12 @@ class Chain:
     # chars = max characters in sentence
     # tries is number of attempts where Markovify tries to get optimal ratio
     # ratio = decimal of desired similarity to original sentence
-    def __init__(self, chars, tries, ratio, filepath):
-        with open(filepath, encoding = "utf-8") as f:
-            text = f.read()
+    def __init__(self, chars, tries, ratio, tweet_list):
 
-        self.filepath = filepath
+        self.text = tweet_list
 
         # Sentences are shown by new lines
-        self.model = markovify.NewlineText(text)
+        self.model = markovify.NewlineText(self.text)
         self.chars = chars
         self.tries = tries
         self.ratio = ratio
@@ -53,5 +51,5 @@ class Chain:
     def get_ratio(self):
         return self.ratio
 
-    def get_filepath(self):
-        return self.filepath
+    def get_text(self):
+        return self.text

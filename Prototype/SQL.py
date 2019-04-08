@@ -24,7 +24,7 @@ class SQL:
     def set_handle(self,handle):
         self.handle  = handle
 
-    def Insertion(self, list_tweets):
+    def Insertion(self, list_tweets, trend=None):
         temp = []
         for x in list_tweets:
             temp.append((x,self.handle))
