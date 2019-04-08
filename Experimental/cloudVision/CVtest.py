@@ -5,11 +5,11 @@ import cloudVision.cvImageProcessor
 
 cv = cloudVision.cvImageProcessor.CV()
 
-meme = cv.openImage(input('enter a filepath: '))
+meme = cv.open_image(input('enter a filepath: '))
 
-memetext = cv.runOCR(meme, 'text')
+memetext = cv.run_ocr(meme, 'text')
 
-memetags = cv.tagImage(meme, 'brief')
+memetags = cv.tag_image(meme, 'brief')
 
 print(meme)
 print(memetext)

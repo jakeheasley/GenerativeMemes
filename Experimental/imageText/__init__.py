@@ -1,4 +1,5 @@
 from PIL import Image, ImageDraw, ImageFont
+import io
 
 default_font_size = 36
 default_font = ImageFont.truetype('./Impact.ttf', default_font_size)
@@ -13,22 +14,27 @@ def writeText(text, image, xPosition, yPosition, fill=default_font_fill):
     @:param yPosition: y coordinate to start writing
     @:param fill: optionally specify a text color
     """
-    # ToDo: make x & y args optional, center text in image if no x/y args are given.
     writer = ImageDraw.Draw(image)
     coordinates = (xPosition, yPosition)
     writer.text(coordinates, text, font=default_font, fill=fill)
     return image
 
 
-def openImage(filepath):
+def open_image(filepath):
     """opens image located at given filepath and returns as PIL.Image.Image object
     @:param filepath: path to the image to open.
     #TODO: how do we incorporate pathlib//make this cross-platform?
     @:return PIL.Image.Image image object"""
     return Image.open(filepath, 'r')
 
+def open_image(blob):
+    """opens image from blob data retrieved from mySQL server"""
+    # TODO: make this work
+    wrappedimage = io.BytesIO(blob)
+    return Image.open(wrappedimage)
 
-def saveImage(img, fp=None):
+
+def save_image(img, fp=None):
     """writes PIL.Image.Image object to disk as a jpg
     @:param img: PIL.Image.Image object. use after writeText()
     """
@@ -38,11 +44,12 @@ def saveImage(img, fp=None):
     else:
         img.save(fp)
 
+
 def caption(imgpath, text, xPosition=None, yPosition=None):
-    img = openImage(imgpath)
+    img = open_image(imgpath)
     if xPosition is None:
         xPosition = (img.__getstate__()[2][0]) / 2
     if yPosition is None:
         yPosition = (img.__getstate__()[2][1]) / 2
     captionedImage = writeText(text, img, xPosition, yPosition)
-    saveImage(captionedImage)
+    save_image(captionedImage)

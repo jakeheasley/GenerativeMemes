@@ -6,17 +6,16 @@ class CV:
 
     def __init__(self):
         credential_path = Path('./Meme Generator-802734cd5cac.json')
-        # self.client = vision.ImageAnnotatorClient.from_service_account_file('/Users/richardgraham/Sources/GenerativeMemes/cloudVision/Meme Generator-802734cd5cac.json')
         self.client = vision.ImageAnnotatorClient.from_service_account_file(credential_path)
 
-    def openImage(self, path):
+    def open_image(self, path):
         """open a given file and return its data for processing"""
         with open(path, 'rb') as imageFile:
             image_data = imageFile.read()
         vision_image = vision.types.Image(content=image_data)
         return vision_image
 
-    def runOCR(self, imgdata, mode='text'):
+    def run_ocr(self, imgdata, mode='text'):
         """takes in image data, sends it to Google CV for OCR, returns text in the image
         @:param imgdata: google.cloud.vision.types.Image object
         @:param mode: can be either 'text' or 'full'.
@@ -35,7 +34,7 @@ class CV:
         elif mode == 'full':
             return text_response
 
-    def tagImage(self, imgdata, mode='brief'):
+    def tag_image(self, imgdata, mode='brief'):
         """takes in image data, sends it to Google CV for image recognition,
         returns list of tagged objects.
         @:param imgdata: google.cloud.vision.types.Image object.
@@ -51,13 +50,13 @@ class CV:
         elif mode == 'full':
             return recog_response
 
-    def cleanOutput(self, proto):
+    def clean_output(self, proto):
         """receives google protocol buffer object containing descriptive information
         about an image, converts the protobuf info to lists and strings for Python to
         use."""
         # TODO: format web_entities field to prepare for database entry
-        # googleCV returns 'RepeatedCompositeContainer' type objects. use the
-        # google.protobuf.json_format module to clean this data into a dict
-        # or something else usable by python
-        # https://stackoverflow.com/questions/19734617/protobuf-to-json-in-python
+        #   googleCV returns 'RepeatedCompositeContainer' type objects. use the
+        #   google.protobuf.json_format module to clean this data into a dict
+        #   or something else usable by python
+        #   https://stackoverflow.com/questions/19734617/protobuf-to-json-in-python
         return
