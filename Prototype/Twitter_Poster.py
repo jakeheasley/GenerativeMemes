@@ -1,12 +1,9 @@
-from Twitter_Bot.Bot import Bot
-from Markov_Object.Markov_Chain import Chain
+from Prototype.Twitter_Bot.Bot import Bot
+from Prototype.Markov_Object.Markov_Chain import Chain
 from pathlib import Path
 import json
 import random
-from datetime import datetime
 from SQL import SQL
-
-before = datetime.now()
 
 chars = 140
 tries = 100
@@ -44,14 +41,16 @@ sql = SQL(host="softwaredev.caybzpwuhc8n.us-east-2.rds.amazonaws.com",
 
 # Get trend information
 def make_trend():
-    trend = ""
-    for x in bot.get_trends(location).values():
-        trend = x
+    search_trend = ""
+    sql_trend = ""
+    for key, val in bot.get_trends(location).items():
+        search_trend = val
+        sql_trend = key
         break
 
-    tweet_list = bot.search_tweets(trend)
+    tweet_list = bot.search_tweets(search_trend, sql_trend)
     database_insertion(tweet_list)
-    return sql.trend_query(trend)
+    return sql.trend_query(sql_trend)
 
 
 def make_tweet():
@@ -77,5 +76,3 @@ markov_tweet = chain.make_sent(1)
 
 for chain in markov_tweet:
     bot.upload_text(chain)
-
-

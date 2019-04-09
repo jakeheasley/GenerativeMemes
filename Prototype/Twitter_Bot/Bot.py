@@ -34,13 +34,13 @@ class Bot:
         return self.clean_tweets(timeline)
 
     # Scrape tweets from specific search term
-    def search_tweets(self, search_term):
+    def search_tweets(self, search_term, trend):
         # initialization of a list to hold all Tweets
         search_term = search_term + "-filter:retweets"
         search_tweets = Cursor(self.api.search, q=search_term,
                                tweet_mode='extended',
                                exclude_replies=True)
-        return self.clean_tweets(search_tweets)
+        return self.clean_tweets(search_tweets, trend)
 
     # Returns tuple-list of tweets that have been formatted
     def clean_tweets(self, timeline, trend=None):
