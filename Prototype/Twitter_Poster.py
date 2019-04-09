@@ -1,5 +1,5 @@
-from Prototype.Twitter_Bot.Bot import Bot
-from Prototype.Markov_Object.Markov_Chain import Chain
+from Twitter_Bot.Bot import Bot
+from Markov_Object.Markov_Chain import Chain
 from pathlib import Path
 import json
 import random

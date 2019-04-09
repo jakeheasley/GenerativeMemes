@@ -42,7 +42,7 @@ class Bot:
                                exclude_replies=True)
         return self.clean_tweets(search_tweets, trend)
 
-    # Returns tuple-list of tweets that have been formatted
+    # Returns tuple-list of tweets that have been formatted for database
     def clean_tweets(self, timeline, trend=None):
         tweets = []
         date = datetime.datetime.today()
