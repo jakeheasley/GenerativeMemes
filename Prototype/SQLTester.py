@@ -26,15 +26,6 @@ bot = Bot(consumer_key=consumer_key,
           access_key=access_key,
           access_secret=access_secret)
 
-location = 23424977
-
-
-temp = bot.get_trends(location)
-search = ""
-sql_q = ""
-for key, value in temp.items():
-    search = value
-    sql_q = key
-    break
-
-print(search, sql_q)
+temp = bot.get_user_tweets("Inspire_us")
+print(temp)
+sql.insertion(temp)
