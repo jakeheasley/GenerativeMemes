@@ -20,10 +20,16 @@ class Chain:
     # Function that returns given number of sentences based on existing model
     def make_sent(self, num_sent):
         sentences = []
-        for i in range(num_sent):
-            sentences.append(self.model.make_short_sentence(max_chars=self.chars,
-                                                            tries=self.tries,
-                                                            max_overlap_ratio=self.ratio))
+
+        while num_sent > 0:
+            sentence = self.model.make_short_sentence(max_chars=self.chars,
+                                                      tries=self.tries,
+                                                      max_overlap_ratio=self.ratio)
+            # Ensures that no one is tagged in a post
+            if "@" not in sentence:
+                sentences.append(sentence)
+                num_sent -= 1
+
         return sentences
 
     # Functions that update variable values
