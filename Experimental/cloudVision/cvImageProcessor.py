@@ -5,8 +5,7 @@ from pathlib import Path
 class CV:
 
     def __init__(self):
-        credential_path = Path('./Meme Generator-802734cd5cac.json')
-        self.client = vision.ImageAnnotatorClient.from_service_account_file(credential_path)
+        self.client = vision.ImageAnnotatorClient.from_service_account_file(input("Path to Google Cloud credentials: "))
 
     def open_image(self, path):
         """open a given file and return its data for processing"""
