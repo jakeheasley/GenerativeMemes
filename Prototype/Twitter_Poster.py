@@ -1,9 +1,8 @@
 from Twitter_Bot.Bot import Bot
 from Markov_Object.Markov_Chain import Chain
-from pathlib import Path
-import json
 import random
 from SQL import SQL
+import Login_Settings
 
 chars = 140
 tries = 100
@@ -13,30 +12,18 @@ handle = "Inspire_us"
 # Geotag for Minneapolis
 location = 23424977
 
-# Finding filepath for twitter_credentials.json
-base_path = Path("twitter_credentials.json").parent
-file_path = (base_path / "../Prototype/Twitter_Bot/twitter_credentials.json").resolve()
-
-# Loads twitter credentials from json file
-with open(file_path) as cred_data:
-    info = json.load(cred_data)
-    consumer_key = info['CONSUMER_KEY']
-    consumer_secret = info['CONSUMER_SECRET']
-    access_key = info['ACCESS_TOKEN']
-    access_secret = info['ACCESS_SECRET']
-
 # Creates twitter_bot that connects to twitter account
-bot = Bot(consumer_key=consumer_key,
-          consumer_secret=consumer_secret,
-          access_key=access_key,
-          access_secret=access_secret)
+bot = Bot(consumer_key=Login_Settings.twitter['CONSUMER_KEY'],
+          consumer_secret=Login_Settings.twitter['CONSUMER_SECRET'],
+          access_key=Login_Settings.twitter['ACCESS_TOKEN'],
+          access_secret=Login_Settings.twitter['ACCESS_SECRET'])
 
 # Connects to SQL database
-sql = SQL(host="softwaredev.caybzpwuhc8n.us-east-2.rds.amazonaws.com",
-          port=6666,
-          username="root",
-          password="paulsmemes",
-          database="Memes")
+sql = SQL(host=Login_Settings.database['HOST'],
+          port=Login_Settings.database['PORT'],
+          username=Login_Settings.database['DB_USERNAME'],
+          password=Login_Settings.database['DB_PASSWORD'],
+          database=Login_Settings.database['DATABASE'])
 
 
 # Get trend information
