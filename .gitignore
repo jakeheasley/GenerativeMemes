@@ -2,4 +2,5 @@
 .DS_Store
 .idea/workspace.xml
 *.pyc
-
+Experimental/cloudVision/GCV_login.json
+Prototype/Login_Settings.py
