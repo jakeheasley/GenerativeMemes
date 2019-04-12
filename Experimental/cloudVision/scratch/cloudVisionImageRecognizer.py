@@ -6,7 +6,7 @@ from google.cloud import vision
 from google.cloud.vision import types
 from google.protobuf.json_format import MessageToDict
 
-client = vision.ImageAnnotatorClient.from_service_account_file(input("Path to Google Cloud credentials: "))
+client = vision.ImageAnnotatorClient.from_service_account_file("./GCV_login.json")
 
 # img = '/Volumes/GoogleDrive/My Drive/3. COMP 225/MEME VAULT/fish joint.jpg'
 img = input('enter filepath to image: ')
