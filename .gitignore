@@ -3,4 +3,5 @@
 .idea/workspace.xml
 *.pyc
 Experimental/cloudVision/GCV_login.json
+Experimental/cloudVision/GCV_login_2.json
 Prototype/Login_Settings.py
