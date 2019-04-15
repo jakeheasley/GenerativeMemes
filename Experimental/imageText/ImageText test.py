@@ -14,8 +14,8 @@ imgPath = pathlib.Path("./a_Meme.jpg")
 # it.caption(imgPath, "aaaaaaaaaaaaaaaa")
 
 foo = it.open_image(imgPath)
-it.overwrite_text(foo, 500, 1000, 600, 670)
-it.write_text("aaaaaaa", foo, 500, 600)
+it.overwrite_text(foo, 100, 400, 100, 150)
+it.write_text("aaaaaaa", foo, 100, 100)
 it.save_image(foo)
 
 # it.overwrite_text(imgPath, 500, 1000, 600, 670)
