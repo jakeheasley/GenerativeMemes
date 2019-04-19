@@ -3,11 +3,12 @@ import markovify
 
 class Chain:
 
-    # Initialize a new Markov chain:
-    # chars = max characters in sentence
-    # tries is number of attempts where Markovify tries to get optimal ratio
-    # ratio = decimal of desired similarity to original sentence
     def __init__(self, chars, tries, ratio, tweet_list):
+        """constructor for a new markov chain
+        @:param chars: integer instance variable for max characters in a sentence.
+        @:param tries: integer number of attempts to acheive optimal ratio.
+        @:param ratio: decimal between 0-1 indicating desired similarity to original text.
+        TODO: make this work with any text, not just specifically a list of tweets?"""
 
         self.text = "\n".join(tweet_list)
 
@@ -17,8 +18,8 @@ class Chain:
         self.tries = tries
         self.ratio = ratio
 
-    # Function that returns given number of sentences based on existing model
     def make_sent(self):
+        """returns self.tries number of sentences based on self.text."""
 
         while True:
             sentence = self.model.make_short_sentence(max_chars=self.chars,

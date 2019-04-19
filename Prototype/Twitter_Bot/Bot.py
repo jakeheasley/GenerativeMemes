@@ -9,26 +9,34 @@ class Bot:
 
     # Initialize and authorize bot with keys
     def __init__(self, consumer_key, consumer_secret, access_key, access_secret):
+        """instantiate a new Bot and authorize it with credentials supplied.
+        @:param consumer_key, consumer_secret, access_keu, acess_secret: strings of login info to the twitter API."""
         auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
         auth.set_access_token(access_key, access_secret)
         self.api = tweepy.API(auth)
 
-    # Upload a text based tweet
     def upload_text(self, text, reply=None):
+        """tweets text.
+        @:param text: string to tweet.
+        @:param reply: optional tweet id of tweet to post in reply to."""
         if reply is None:
             self.api.update_status(status=text)
         else:
             self.api.update_status(status=text, in_reply_to_status_id=reply)
 
-    # Upload a picture (text optional)
     def upload_media(self, filename, text=None):
+        """tweets media.
+        @:param filename: string filepath of media to post.
+        @:param text: optional string to tweet."""
         if text is None:
             self.api.update_with_media(filename)
         else:
             self.api.update_with_media(filename, text)
 
-    # Scrape tweets from specific user
     def get_user_tweets(self, handle):
+        """scrapes tweets from indicated user.
+        @:param handle: the string handle of the user to scrape from.
+        @:return: formatted list of all scraped twee"""
         # initialization of a list to hold all Tweets
         tweets = []
         timeline = Cursor(self.api.user_timeline, screen_name=handle,
@@ -37,8 +45,11 @@ class Bot:
                           include_rts=False)
         return self.clean_tweets(timeline)
 
-    # Scrape tweets from specific search term
     def search_tweets(self, search_term, trend):
+        """searches twitter for supplied search term.
+        @:param search_term: term to search
+        @:return self.clean_tweets.
+        TODO: why do we return trend?"""
         # initialization of a list to hold all Tweets
         search_term = search_term + "-filter:retweets" + "-filter:replies"
         search_tweets = Cursor(self.api.search, q=search_term,

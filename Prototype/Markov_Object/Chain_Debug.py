@@ -1,5 +1,7 @@
 from Markov_Object.Markov_Chain import Chain
 
+# testing file for Markov generator
+
 
 filepath = "testing.txt"
 chars = 140
