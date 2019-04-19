@@ -1,7 +1,10 @@
 from Twitter_Bot.Bot import Bot
+import tweepy
+from ast import literal_eval
+
 import json
 from Markov_Object.Markov_Chain import Chain
-
+import Login_Settings
 # Minneapolis ID
 location = 23424977
 
@@ -9,23 +12,27 @@ chars = 140
 tries = 100
 ratio = .5
 
-with open('twitter_credentials.json') as cred_data:
-    info = json.load(cred_data)
-    consumer_key = info['CONSUMER_KEY']
-    consumer_secret = info['CONSUMER_SECRET']
-    access_key = info['ACCESS_TOKEN']
-    access_secret = info['ACCESS_SECRET']
+# Creates twitter_bot that connects to twitter account
+bot = Bot(consumer_key=Login_Settings.twitter['CONSUMER_KEY'],
+          consumer_secret=Login_Settings.twitter['CONSUMER_SECRET'],
+          access_key=Login_Settings.twitter['ACCESS_TOKEN'],
+          access_secret=Login_Settings.twitter['ACCESS_SECRET'])
+print(bot.get_mentions(0))
+'''
+tweets = bot.get_user_tweets("RoastsBot")
+tweet_string = []
 
-bot = Bot(consumer_key=consumer_key,
-          consumer_secret=consumer_secret,
-          access_key=access_key,
-          access_secret=access_secret)
+for tweet in tweets:
+    tweet_string.append(tweet[1])
 
-tweets = bot.get_user_tweets("inspire_us")
 
 chain = Chain(chars=chars,
               tries=tries,
               ratio=ratio,
-              tweet_list=tweets)
+              tweet_list=tweet_string)
 
-print(chain.make_sent(1))
+markov = chain.make_sent(50)
+
+for m in markov:
+    print(m)
+'''

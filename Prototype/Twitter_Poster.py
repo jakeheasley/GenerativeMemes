@@ -59,7 +59,6 @@ chain = Chain(chars=chars,
               ratio=ratio,
               tweet_list=sql_list)
 
-markov_tweet = chain.make_sent(1)
+markov_tweet = chain.make_sent()
 
-for chain in markov_tweet:
-    bot.upload_text(chain)
+bot.upload_text(markov_tweet)

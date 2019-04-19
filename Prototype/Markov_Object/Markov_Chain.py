@@ -18,25 +18,22 @@ class Chain:
         self.ratio = ratio
 
     # Function that returns given number of sentences based on existing model
-    def make_sent(self, num_sent):
-        sentences = []
+    def make_sent(self):
 
-        while num_sent > 0:
+        while True:
             sentence = self.model.make_short_sentence(max_chars=self.chars,
                                                       tries=self.tries,
                                                       max_overlap_ratio=self.ratio)
             # Ensures that no one is tagged in a post
             if "@" not in sentence:
-                sentences.append(sentence)
-                num_sent -= 1
+                break
 
-        return sentences
+        return sentence
 
     # Functions that update variable values
-    def update_text(self, filepath):
-        with open(filepath, encoding = "utf-8") as f:
-            text = f.read()
-        self.model = markovify.NewlineText(text)
+    def update_text(self, tweet_list):
+        self.text = "\n".join(tweet_list)
+        self.model = markovify.NewlineText(self.text)
 
     def update_chars(self, chars):
         self.chars = chars
