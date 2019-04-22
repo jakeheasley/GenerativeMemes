@@ -33,7 +33,7 @@ class SQL:
         return query_list
 
     def trend_query(self, trend):
-        query = """select Tweet from Tweets where trend =  %s;"""
+        query = """select Tweet from Tweets where tag =  %s;"""
         self.cursor.execute(query, (trend,))
         query_list = []
         for x in self.cursor:
