@@ -28,6 +28,8 @@ sql = SQL(host=Login_Settings.database['HOST'],
 
 # Get trend information
 def make_trend():
+    """Todo: what does this do?
+    @:return todo: what does this do?"""
     search_trend = ""
     sql_trend = ""
     for key, val in bot.get_trends(location).items():
@@ -41,11 +43,14 @@ def make_trend():
 
 
 def make_tweet():
+    """TODO: what does this do?
+    @:return """
     database_insertion(tweet_list=bot.get_user_tweets(handle))
     return sql.author_query(handle)
 
 
 def database_insertion(tweet_list):
+    """TODO what does this do?"""
     sql.insertion(tweet_list)
 
 
