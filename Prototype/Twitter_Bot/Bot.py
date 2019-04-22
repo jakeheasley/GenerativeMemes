@@ -14,6 +14,7 @@ class Bot:
         auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
         auth.set_access_token(access_key, access_secret)
         self.api = tweepy.API(auth)
+        self.handle = "@markoving_bot"
 
     def upload_text(self, text, reply=None):
         """tweets text.
@@ -36,7 +37,7 @@ class Bot:
     def get_user_tweets(self, handle):
         """scrapes tweets from indicated user.
         @:param handle: the string handle of the user to scrape from.
-        @:return: formatted list of all scraped twee"""
+        @:return: formatted list of all scraped tweets"""
         # initialization of a list to hold all Tweets
         tweets = []
         timeline = Cursor(self.api.user_timeline, screen_name=handle,
@@ -47,8 +48,9 @@ class Bot:
 
     def search_tweets(self, search_term, trend):
         """searches twitter for supplied search term.
-        @:param search_term: term to search
+        @:param search_term: string term to search
         @:return self.clean_tweets.
+        TODO: what type is self.clean_tweets?
         TODO: why do we return trend?"""
         # initialization of a list to hold all Tweets
         search_term = search_term + "-filter:retweets" + "-filter:replies"
@@ -56,8 +58,11 @@ class Bot:
                                tweet_mode='extended')
         return self.clean_tweets(search_tweets, trend)
 
-    # Returns tuple-list of tweets that have been formatted for database
     def clean_tweets(self, timeline, trend=None):
+        """formats tweets for database entry as a tuple-list.
+        @:param timeline: TODO: what's this?
+        @:param trend: optional hashtag associated with the trend of a tweet
+        @:return list of tuples where each tuple corresponds to one tweet."""
         tweets = []
         date = datetime.datetime.today()
         date = date.strftime('%Y-%m-%d')
@@ -72,9 +77,11 @@ class Bot:
                            tweet.created_at.strftime('%Y-%m-%d')))
         return tweets
 
-    # Get all tweets that @ the bot
     def get_mentions(self, recent_id):
-        mentions = Cursor(self.api.search, q="@markoving_bot -filter:retweets",
+        """gets all tweets that @mention the bot.
+        @:param recend_id TODO: what's this?
+        @:return tweet_list TODO: what's this? does it need to be fed thru clean_tweets() or is it already clean"""
+        mentions = Cursor(self.api.search, q=self.handle + " -filter:retweets",
                           tweet_mode='extended',
                           since_id=recent_id,)
         tweet_list = []
@@ -88,8 +95,10 @@ class Bot:
 
         return tweet_list
 
-    # Returns dictionary of hashtag trends and respective search queries
     def get_trends(self, location):
+        """returns dictionary of hashtag trends and their respective search queries.
+        @:param location: TODO what's this?
+        @:return trend_search: TODO what's this?"""
         trends = self.api.trends_place(location)
         trend_search = {}
 
@@ -101,8 +110,6 @@ class Bot:
                 trend_search[trend['name']] = trend['query']
         return trend_search
 
-    # Helper function that tells how many queries we have left per hour
     def rate_status(self):
+        """@:return number of queries remaining per hour."""
         return self.api.rate_limit_status()
-
-
