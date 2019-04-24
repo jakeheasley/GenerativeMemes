@@ -20,7 +20,7 @@ class SQL:
         self.cursor = self.db.cursor()
 
     def insertion(self, tweet_tuple):
-        sql_insert = """insert ignore into Tweets (Author, Tweet, id, trend, date_pulled, tweet_date) values (%s,%s,%s,%s,%s,%s);"""
+        sql_insert = """insert ignore into Tweets (Author, Tweet, id, tag, date_pulled, tweet_date) values (%s,%s,%s,%s,%s,%s);"""
         self.cursor.executemany(sql_insert, tweet_tuple)
         self.db.commit()
 
