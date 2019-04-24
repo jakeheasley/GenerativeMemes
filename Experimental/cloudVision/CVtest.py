@@ -9,9 +9,9 @@ meme = cv.open_image(input('enter a filepath: '))
 
 memetext = cv.run_ocr(meme, 'text')
 
-memetags = cv.tag_image(meme, 'brief')
+memetags = cv.tag_image(meme, 'full')
 
 print(meme)
-print(memetext)
+# print(memetext)
 print(memetags)
 
