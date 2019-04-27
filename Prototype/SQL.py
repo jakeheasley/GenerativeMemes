@@ -1,8 +1,6 @@
 import mysql.connector as mysql
 
-#SQl class for interacting with the MYSQL database
 class SQL:
-    #intializing and connecting to database
     def __init__(self, host, port, username, password, database):
         self.host = host
         self.port = port
@@ -21,9 +19,8 @@ class SQL:
 
         self.cursor = self.db.cursor()
 
-    #inserting tweets tuples into MYSQL
-    def insertion_tweets(self, tweet_tuple_list):
-        sql_insert = """insert ignore into Tweets (Author, Tweet, id, trend, date_pulled, tweet_date) values (%s,%s,%s,%s,%s,%s);"""
+    def insertion(self, tweet_tuple):
+        sql_insert = """insert ignore into Tweets (Author, Tweet, id, tag, date_pulled, tweet_date) values (%s,%s,%s,%s,%s,%s);"""
         self.cursor.executemany(sql_insert, tweet_tuple)
         self.db.commit()
 
@@ -63,8 +60,7 @@ class SQL:
             query_list.append(x[0])
         return query_list
 
-    #query tweets where the tag is passed as parameter
-    def tag_query(self, trend):
+    def trend_query(self, trend):
         query = """select Tweet from Tweets where tag =  %s;"""
         self.cursor.execute(query, (trend,))
         query_list = []
