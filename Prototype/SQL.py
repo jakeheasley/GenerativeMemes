@@ -27,8 +27,7 @@ class SQL:
         self.cursor.executemany(sql_insert, tweet_tuple)
         self.db.commit()
 
-    #inserts the photo with blob and returns the id of the insertion
-    #format of photo_tuple is (photo blob, photo label, photo_text)
+    #inserts the photo with blob and returns the id of the insertion to be used for insertion similar photo method
     def insertion_photo(self, temp_blob, temp_label, temp_text):
         temp_id = self.photo_id_search(temp_label)
         self.cursor.execute("insert ignore into ocr (photo, label, id) values (%s,%s,%s);",(temp_blob,temp_label, temp_id))
@@ -42,7 +41,6 @@ class SQL:
         sql_insert = "insert ignore into ocr_similar (photo_text, photo_id) values (%s,%s);"
         self.cursor.executemany(sql_insert, tuple_list)
         self.db.commit()
-
 
     #helper method with finding correct id for label
     def photo_id_search(self, label):
@@ -74,6 +72,29 @@ class SQL:
             query_list.append(x[0])
         return query_list
 
+    #returns list of photo_text from a photo_label
+    def ocr_label_query(self,photo_label):
+        query_list = []
+        query = "select id from ocr where label = %s;"
+        self.cursor.execute(query,(photo_label,))
+        temp = self.cursor.fetchone()
+        if (temp != None):
+            query = "select photo_text from ocr_similar where photo_id = %s"
+            self.cursor.execute(query, (temp[0],))
+            for x in self.cursor:
+                query_list.append(x[0])
+
+        return(query_list)
+
+    #returns the blob for the photo to recreate the photo
+    def blob_query(self, photo_label):
+        query = "select photo from ocr where label = %s"
+        self.cursor.execute(query,(photo_label,))
+
+    # testes whether the current query has returned nothing
+    def query_test(self):
+        # currently in thought process
+        a = 2
     #closes connection with database do so when done with object
     def close(self):
         self.cursor.close()

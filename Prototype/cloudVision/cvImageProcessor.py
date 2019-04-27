@@ -5,7 +5,7 @@ from pathlib import Path
 class CV:
 
     def __init__(self):
-        self.client = vision.ImageAnnotatorClient.from_service_account_file("cloudVision/GCV_login_2.json")
+        self.client = vision.ImageAnnotatorClient.from_service_account_file("GCV_login_2.json")
 
     def open_image(self, path):
         """open a given file and return its data for processing
