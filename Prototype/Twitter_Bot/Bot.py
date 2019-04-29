@@ -34,7 +34,7 @@ class Bot:
         else:
             self.api.update_with_media(filename, text)
 
-    def get_user_tweets(self, handle):
+    def get_user_tweets(self, handle, tag=None):
         """scrapes tweets from indicated user.
         @:param handle: the string handle of the user to scrape from.
         @:return: formatted list of all scraped tweets"""
@@ -44,7 +44,7 @@ class Bot:
                           tweet_mode='extended',
                           exclude_replies=True,
                           include_rts=False)
-        return self.clean_tweets(timeline)
+        return self.clean_tweets(timeline, tag)
 
     def search_tweets(self, search_term, trend):
         """searches twitter for supplied search term.
@@ -58,7 +58,7 @@ class Bot:
                                tweet_mode='extended')
         return self.clean_tweets(search_tweets, trend)
 
-    def clean_tweets(self, timeline, trend=None):
+    def clean_tweets(self, timeline, tag=None):
         """formats tweets for database entry as a tuple-list.
         @:param timeline: TODO: what's this?
         @:param trend: optional hashtag associated with the trend of a tweet
@@ -66,21 +66,25 @@ class Bot:
         tweets = []
         date = datetime.datetime.today()
         date = date.strftime('%Y-%m-%d')
-        for tweet in timeline.items(500):
+        for tweet in timeline.items(2000):
             tweet_text = re.sub("https:.*$", "", tweet.full_text)
             tweet_text = re.sub("&amp", "&", tweet_text)
             tweets.append((tweet.user.screen_name,
-                           tweet_text,
+                           tweet_text.replace("\n", " "),
                            tweet.id_str,
-                           trend,
+                           tag,
                            date,
                            tweet.created_at.strftime('%Y-%m-%d')))
         return tweets
 
+    def get_status(self, tweet_id):
+        tweet_list =self.api.statuses_lookup([tweet_id])
+        return tweet_list[0]
+
     def get_mentions(self, recent_id):
         """gets all tweets that @mention the bot.
-        @:param recend_id TODO: what's this?
-        @:return tweet_list TODO: what's this? does it need to be fed thru clean_tweets() or is it already clean"""
+        @:param recent_id: ID string of latest mention that we have pulled
+        @:return tweet_list returns dictionary of mentioned tweets with username, text, and tweet ID"""
         mentions = Cursor(self.api.search, q=self.handle + " -filter:retweets",
                           tweet_mode='extended',
                           since_id=recent_id,)
@@ -91,7 +95,10 @@ class Bot:
                 tweet_text = re.sub("https:.*$", "", tweet.full_text)
                 tweet_text = re.sub("&amp", "&", tweet_text)
 
-                tweet_list.append({"username": tweet.user.screen_name, "text": tweet_text, "tweet_id": tweet.id_str})
+                tweet_list.append({"username": tweet.user.screen_name,
+                                   "text": tweet_text,
+                                   "tweet_id": tweet.id_str,
+                                   "reply_id": tweet.in_reply_to_status_id})
 
         return tweet_list
 

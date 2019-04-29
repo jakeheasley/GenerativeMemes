@@ -9,13 +9,15 @@ import time
 
 chars = 140
 tries = 100
-ratio = .5
+ratio = .4
 
 # ID of latest post that mentioned bot. Default to zero (will change)
-latest_mention = "0"
+with open("last_mention_id.txt", "r") as f:
+    latest_mention = f.read()
+    f.close()
 
 # List of General_Post functions (update as you create functions)
-post_list = [General_Posts.inspire, General_Posts.trend]
+post_list = [General_Posts.inspire, General_Posts.weather, General_Posts.horoscope]
 
 # Tracker that is set to the last time bot posted, does not include interactions
 latest_post = datetime.datetime(2000, 1, 1, 0, 0, 0)
@@ -56,14 +58,17 @@ while True:
 
             # If instruction is not in interaction dictionary
             if instruction[0].lower() not in Interactions.function_names.keys():
-                text = tweeter + " I'm sorry, but I don't understand that instruction you gave me"
-                bot.upload_text(text=text, reply=tweet_id)
+                Interactions.dont_understand(bot, sql, chain, mention)
             else:
                 # Calls the interaction function
                 user_function = Interactions.function_names[instruction[0].lower()]
                 user_function(bot, sql, chain, mention)
             if int(tweet_id) > int(latest_mention):
                 latest_mention = tweet_id
+
+                # Saves last_mention to a file in case program needs to be restarted
+                with open("last_mention_id.txt", "w+") as f:
+                    f.write(latest_mention)
 
     # Determines if it has been three hours since previous post
     current_time = datetime.datetime.now()

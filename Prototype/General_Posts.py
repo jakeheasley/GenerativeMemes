@@ -4,10 +4,7 @@
 
 # Posts inspirational message
 def inspire(bot, sql, chain):
-    handle = "inspire_us"
-    sql.insertion(bot.get_user_tweets(handle))
-
-    tweets = sql.author_query(handle)
+    tweets = sql.trend_query("inspired")
 
     chain.update_text(tweets)
     generated = chain.make_sent()
@@ -15,25 +12,20 @@ def inspire(bot, sql, chain):
     bot.upload_text(text=text)
 
 
-# Posts trending tweet
-def trend(bot, sql, chain):
-    location = 23424977
-    bot.get_trends(location)
+def weather(bot, sql, chain):
+    tweets = sql.trend_query("weather")
 
-    search_trend = ""
-    sql_trend = ""
-    for key, val in bot.get_trends(location).items():
-        search_trend = val
-        sql_trend = key
-        break
+    chain.update_text(tweets)
+    generated = chain.make_sent()
+    text = generated[:-1] + "." + " #WeatherReport"
+    bot.upload_text(text=text)
 
-    tweet_list = bot.search_tweets(search_trend, sql_trend)
-    sql.insertion(tweet_list)
-    chain.update_text(sql.trend_query(sql_trend))
-    text = chain.make_sent()
 
-    if sql_trend not in text:
-        text = text + " " + sql_trend
+def horoscope(bot, sql, chain):
+    tweets = sql.trend_query("horoscope")
 
+    chain.update_text(tweets)
+    generated = chain.make_sent()
+    text = generated + " #horoscope"
     bot.upload_text(text=text)
 

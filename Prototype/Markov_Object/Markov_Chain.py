@@ -1,4 +1,17 @@
 import markovify
+import re
+import spacy
+
+nlp = spacy.load("en")
+
+
+class POSifiedText(markovify.Text):
+    def word_split(self, sentence):
+        return ["::".join((word.orth_, word.pos_)) for word in nlp(sentence)]
+
+    def word_join(self, words):
+        sentence = " ".join(word.split("::")[0] for word in words)
+        return sentence
 
 
 class Chain:
@@ -19,7 +32,7 @@ class Chain:
         self.ratio = ratio
 
     def make_sent(self):
-        """returns self.tries number of sentences based on self.text."""
+        """Returns a generated sentence based on current text"""
 
         while True:
             sentence = self.model.make_short_sentence(max_chars=self.chars,
@@ -29,6 +42,15 @@ class Chain:
             if "@" not in sentence:
                 break
 
+        return sentence
+
+    def make_sent_seed(self, seed):
+        """Returns a sentence that starts with the seeded term"""
+        while True:
+            sentence = self.model.make_sentence_with_start(beginning=seed, strict=False)
+
+            if ("@" not in sentence) and (len(sentence) <= 140):
+                break
         return sentence
 
     # Functions that update variable values

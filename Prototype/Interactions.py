@@ -3,11 +3,14 @@
     object, chain, and mention tweet"""
 import tweepy
 from ast import literal_eval
+import random
 
 
 # Generates random tweet from twitter account specified by user
-def generate(bot, sql, chain, mention):
+def impersonate(bot, sql, chain, mention):
     tweeter = "@" + mention['username']
+
+    # Get the the person we want to impersonate from the instruction
     scrape = mention["text"].split('@markoving_bot, 1')[0].split()[2]
     tweet_id = mention["tweet_id"]
 
@@ -39,7 +42,72 @@ def generate(bot, sql, chain, mention):
     bot.upload_text(text=text, reply=tweet_id)
 
 
+# Returns an inspirational quot
+def inspire_me(bot, sql, chain, mention):
+    tweet_id = mention["tweet_id"]
+    tweeter = "@" + mention["username"]
+    tweets = sql.trend_query("inspired")
+    chain.update_text(tweets)
+
+    text = tweeter + chain.make_sent() + " #inspired"
+    bot.upload_text(text=text, reply=tweet_id)
+
+
+# Returns a generated weather report
+def weather_report(bot, sql, chain, mention):
+    tweet_id = mention["tweet_id"]
+    tweeter = "@" + mention["username"]
+    tweets = sql.trend_query("weather")
+
+    chain.update_text(tweets)
+    text = tweeter + chain.make_sent() + " #WeatherReport"
+    bot.upload_text(text=text, reply=tweet_id)
+
+
+# Returns a horoscope based on given sign
+def horoscope(bot, sql, chain, mention):
+    sign_list = ["aquarius", "pisces", "aries", "taurus", "gemini", "cancer",
+                 "leo", "virgo", "libra", "scorpio", "sagittarius", "capricorn"]
+    tweet_id = mention["tweet_id"]
+    tweeter = "@" + mention["username"]
+    tweets = sql.trend_query("horoscope")
+
+    chain.update_text(tweets)
+
+    # Get sign from instruction
+    sign = mention["text"].split('@markoving_bot, 1')[0].split()[2]
+
+    # Checking for incorrect signs/Ophiuchus
+    if sign.lower() not in sign_list:
+        if sign.lower() is "Ophiuchus":
+            text = tweeter + " This bot doesn't believe in that sign #only12"
+        else:
+            text = tweeter + " That sign doesn't seem to exist yet"
+        bot.upload_text(text=text, reply=tweet_id)
+    else:
+        seed = "#" + sign[0].upper() + sign[1:] + ":"
+
+        text = tweeter + chain.make_sent_seed(seed) + " #horoscope"
+        bot.upload_text(text=text, reply=tweet_id)
+
+
+# What happens when the bot doesn't understand a command
+def dont_understand(bot, sql, chain, mention):
+    tweeter = "@" + mention["username"]
+    tweet_id = mention["tweet_id"]
+    random_cap = ""
+    for text in mention["text"].split('@markoving_bot, 1')[0]:
+        rand = bool(random.getrandbits(1))
+        random_cap = random_cap + (text.lower() if rand else text.upper())
+    text = tweeter + " " + "\"" + random_cap + "\"" + " #IDontUnderstand"
+    bot.upload_text(text=text, reply=tweet_id)
+
+
 # Dictionary of function names. Key = str(function), value = function
 function_names = {
-    "generate": generate
+    "impersonate": impersonate,
+    "dont_understand": dont_understand,
+    "inspiration": inspire_me,
+    "weather": weather_report,
+    "horoscope": horoscope
 }
