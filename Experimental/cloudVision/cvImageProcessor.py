@@ -10,7 +10,7 @@ class CV:
     def open_image(self, path):
         """open a given file and return its data for processing
         @:param path: filepath to open
-        @:return vision_image: vision.types.Image - this seems to be different than normal image binary"""
+        @:return vision_image: vision.types.Image - this is different than normal image binary"""
         with open(path, 'rb') as imageFile:
             image_data = imageFile.read()
         vision_image = vision.types.Image(content=image_data)
@@ -18,8 +18,8 @@ class CV:
 
     def open_blob(self, blob):
         """convert binary image data for GCV.
-        @:param blob: binary image data, i.e. from python's standard open() method. TODO: or from SQL?
-        @:return vision.types.Image - this seems to be different than normal image binary"""
+        @:param blob: binary image data, i.e. from python's standard open() method or from SQL database.
+        @:return vision.types.Image - this is different than normal image binary"""
         return vision.types.Image(content=blob)
 
     def run_ocr(self, imgdata, mode='text'):
@@ -66,4 +66,5 @@ class CV:
         #   google.protobuf.json_format module to clean this data into a dict
         #   or something else usable by python
         #   https://stackoverflow.com/questions/19734617/protobuf-to-json-in-python
+        #
         return
