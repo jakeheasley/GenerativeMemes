@@ -31,11 +31,15 @@ class Chain:
         self.tries = tries
         self.ratio = ratio
 
-    def make_sent(self):
-        """Returns a generated sentence based on current text"""
+    def make_sent(self, chars=None):
+        """Returns a generated sentence based on current text
+        @:param chars: optional parameter when you want to set the character limit for a sentence"""
+
+        if chars is None:
+            chars=self.chars
 
         while True:
-            sentence = self.model.make_short_sentence(max_chars=self.chars,
+            sentence = self.model.make_short_sentence(max_chars=chars,
                                                       tries=self.tries,
                                                       max_overlap_ratio=self.ratio)
             # Ensures that no one is tagged in a post

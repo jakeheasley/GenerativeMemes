@@ -55,9 +55,8 @@ while True:
 
             # Removes all text before mention and then parses later text into list
             instruction = mention["text"].split('@markoving_bot, 1')[0].split()[1:]
-
             # If instruction is not in interaction dictionary
-            if instruction[0].lower() not in Interactions.function_names.keys():
+            if len(instruction) is 0 or instruction[0].lower() not in Interactions.function_names.keys():
                 Interactions.dont_understand(bot, sql, chain, mention)
             else:
                 # Calls the interaction function
@@ -85,4 +84,4 @@ while True:
         post_list.append(post_list.pop(0))
 
     #  Sleeps for 60 seconds
-    time.sleep(60)
+    time.sleep(15)

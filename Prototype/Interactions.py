@@ -95,11 +95,8 @@ def horoscope(bot, sql, chain, mention):
 def dont_understand(bot, sql, chain, mention):
     tweeter = "@" + mention["username"]
     tweet_id = mention["tweet_id"]
-    random_cap = ""
-    for text in mention["text"].split('@markoving_bot, 1')[0]:
-        rand = bool(random.getrandbits(1))
-        random_cap = random_cap + (text.lower() if rand else text.upper())
-    text = tweeter + " " + "\"" + random_cap + "\"" + " #IDontUnderstand"
+    chain.update_text(sql.trend_query("flirt"))
+    text = tweeter + " " + "\"" + chain.make_sent(140) + " #ILoveYou #ButIDontUnderstandYou"
     bot.upload_text(text=text, reply=tweet_id)
 
 

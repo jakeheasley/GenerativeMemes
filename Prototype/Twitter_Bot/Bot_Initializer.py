@@ -10,7 +10,7 @@ location = 23424977
 
 chars = 140
 tries = 100
-ratio = .3
+ratio = .6
 
 # Connects to SQL database
 sql = SQL(host=Login_Settings.database['HOST'],
@@ -31,23 +31,15 @@ chain = Chain(chars=chars,
               ratio=ratio,
               tweet_list=["dummy info \n"])
 
-'''tuple_list = bot.get_user_tweets("ZodiacFacts", tag="horoscope")
+'''tuple_list = bot.get_user_tweets("RomanticcQuotes", tag="flirt") + bot.get_user_tweets("LikeLoveInLove", tag="flirt") + bot.get_user_tweets("romntic_quotes", tag="flirt")
+
 sql.insertion(tuple_list)'''
 
-latest_mention = "0"
-mentions = bot.get_mentions(latest_mention)
-for mention in mentions:
-    tweet_id = mention["tweet_id"]
+chain.update_text(sql.trend_query("flirt"))
 
-    if int(tweet_id) > int(latest_mention):
-        latest_mention = tweet_id
+for x in range(1, 50):
+    print(chain.make_sent(190))
 
-with open("last_mention_id.txt","w+") as f:
-    f.write(latest_mention)
-    f.close()
-
-with open("last_mention_id.txt","r") as f:
-    print(f.read())
 
 '''tweets = bot.get_user_tweets("RoastsBot")
 tweet_string = []
