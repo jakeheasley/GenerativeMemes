@@ -53,7 +53,7 @@ class Bot:
         TODO: what type is self.clean_tweets?
         TODO: why do we return trend?"""
         # initialization of a list to hold all Tweets
-        search_term = search_term + "-filter:retweets" + "-filter:replies"
+        search_term = search_term + "-filter:retweets"
         search_tweets = Cursor(self.api.search, q=search_term,
                                tweet_mode='extended')
         return self.clean_tweets(search_tweets, trend)
