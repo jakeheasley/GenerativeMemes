@@ -2,7 +2,7 @@
 as it will determine what the latest mention is before scheduler determines it'''
 
 from Twitter_Bot.Bot import Bot
-import Login_Settings
+from Login_Settings_General import Login_Settings
 
 # Creates twitter_bot that connects to twitter account
 bot = Bot(consumer_key=Login_Settings.twitter['CONSUMER_KEY'],

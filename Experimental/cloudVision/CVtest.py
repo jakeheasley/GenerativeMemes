@@ -1,16 +1,16 @@
 import cvImageProcessor
-import Login_Settings
+from Login_Settings_General import Login_Settings
 import mysql.connector as mysql
 
 
 # print(Login_Settings.database)
 db = mysql.connect(host=Login_Settings.database['HOST'],
-          port=Login_Settings.database['PORT'],
-          user=Login_Settings.database['DB_USERNAME'],
-          password=Login_Settings.database['DB_PASSWORD'],
-          database=Login_Settings.database['DATABASE'],
-          use_pure = True
-          )
+                   port=Login_Settings.database['PORT'],
+                   user=Login_Settings.database['DB_USERNAME'],
+                   password=Login_Settings.database['DB_PASSWORD'],
+                   database=Login_Settings.database['DATABASE'],
+                   use_pure = True
+                   )
 
 cursor = db.cursor()
 

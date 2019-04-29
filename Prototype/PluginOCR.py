@@ -1,8 +1,6 @@
-import Login_Settings
+from Login_Settings_General import Login_Settings
 import SQL
 import cloudVision.cvImageProcessor as CV
-import mysql.connector as mysql
-
 
 cloud_vision = CV.CV()
 binary_data = 0
@@ -14,10 +12,10 @@ temp = cloud_vision.tag_image(binary_meme,'full')
 print(binary_meme)
 
 sql = SQL.SQL(host=Login_Settings.database['HOST'],
-          port=Login_Settings.database['PORT'],
-          username=Login_Settings.database['DB_USERNAME'],
-          password=Login_Settings.database['DB_PASSWORD'],
-          database=Login_Settings.database['DATABASE'])
+              port=Login_Settings.database['PORT'],
+              username=Login_Settings.database['DB_USERNAME'],
+              password=Login_Settings.database['DB_PASSWORD'],
+              database=Login_Settings.database['DATABASE'])
 
 temp = sql.insertion_photo(binary_data,"suprised pikachu meme","testing")
 sql.insertion_similar_photo(["testing 1","testing 2"],temp)

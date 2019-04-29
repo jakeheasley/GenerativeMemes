@@ -1,9 +1,9 @@
 from Twitter_Bot.Bot import Bot
 from SQL import SQL
 
-import json
 from Markov_Object.Markov_Chain import Chain
-import Login_Settings
+from Login_Settings_General import Login_Settings
+
 # Minneapolis ID
 location = 23424977
 

@@ -1,7 +1,7 @@
 from Twitter_Bot.Bot import Bot
 from Markov_Object.Markov_Chain import Chain
 from SQL import SQL
-import Login_Settings
+from Login_Settings_General import Login_Settings
 import Interactions
 import General_Posts
 import datetime

@@ -2,7 +2,7 @@ from Twitter_Bot.Bot import Bot
 from Markov_Object.Markov_Chain import Chain
 import random
 from SQL import SQL
-import Login_Settings
+from Login_Settings_General import Login_Settings
 
 chars = 140
 tries = 100
