@@ -3,7 +3,7 @@ from SQL import SQL
 
 from Markov_Object.Markov_Chain import Chain
 from Login_Settings_General import Login_Settings
-
+import datetime
 # Minneapolis ID
 location = 23424977
 
@@ -32,29 +32,13 @@ chain = Chain(chars=chars,
               tweet_list=["dummy info \n"])
 
 '''tuple_list = bot.get_user_tweets("RomanticcQuotes", tag="flirt") + bot.get_user_tweets("LikeLoveInLove", tag="flirt") + bot.get_user_tweets("romntic_quotes", tag="flirt")
-
-sql.insertion(tuple_list)'''
-
-chain.update_text(sql.trend_query("flirt"))
-
-for x in range(1, 50):
-    print(chain.make_sent(190))
-
-
-'''tweets = bot.get_user_tweets("RoastsBot")
-tweet_string = []
-
-for tweet in tweets:
-    tweet_string.append(tweet[1])
-
-
-chain = Chain(chars=chars,
-              tries=tries,
-              ratio=ratio,
-              tweet_list=tweet_string)
-
-markov = chain.make_sent(50)
-
-for m in markov:
-    print(m)
 '''
+
+with open("latest_post.txt", "w+") as f:
+    f.write(str(datetime.datetime.now()))
+
+with open("latest_post.txt", "r") as f:
+    str = f.read()
+    print(str)
+
+print(datetime.datetime.strptime(str, "%Y-%m-%d %H:%M:%S.%f"))

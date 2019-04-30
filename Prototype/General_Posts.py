@@ -29,3 +29,8 @@ def horoscope(bot, sql, chain):
     text = generated + " #horoscope"
     bot.upload_text(text=text)
 
+
+function_names = {"horoscope": horoscope,
+                  "weather": weather,
+                  "inspire": inspire
+}

@@ -16,11 +16,18 @@ with open("last_mention_id.txt", "r") as f:
     latest_mention = f.read()
     f.close()
 
+with open("latest_post.txt", "r") as f:
+    info = f.read().splitlines()
+    f.close()
+
+# Gets last post from file in correct datetime format
+latest_post = datetime.datetime.strptime(info.pop(0), "%Y-%m-%d %H:%M:%S.%f")
+
 # List of General_Post functions (update as you create functions)
-post_list = [General_Posts.inspire, General_Posts.weather, General_Posts.horoscope]
+post_list = info
 
 # Tracker that is set to the last time bot posted, does not include interactions
-latest_post = datetime.datetime(2000, 1, 1, 0, 0, 0)
+
 
 # Creates twitter_bot that connects to twitter account
 bot = Bot(consumer_key=Login_Settings.twitter['CONSUMER_KEY'],
@@ -74,14 +81,20 @@ while True:
     time_passed = current_time-latest_post
 
     if time_passed.total_seconds() > 10800:
-        post = post_list[0]
+        # Get function from dictionary using post_list
+        post = General_Posts.function_names[post_list[0]]
         post(bot, sql, chain)
 
         # Moves the post function to the back of the function list. Ensuring
         # an even distribution of our various types of posts
+        post_list.append(post_list.pop(0))
+
         latest_post = datetime.datetime.now()
 
-        post_list.append(post_list.pop(0))
+        with open("latest_post.txt", "w+") as f:
+            f.write(str(latest_post)+"\n")
+            for l in post_list:
+                f.write(l + "\n")
 
     #  Sleeps for 60 seconds
     time.sleep(15)

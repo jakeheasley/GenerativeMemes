@@ -1,9 +1,10 @@
 '''Run this whenever you run the program on a new machine
-as it will determine what the latest mention is before scheduler determines it'''
+as it will determine what the latest mention and post is before scheduler determines it'''
 
 from Twitter_Bot.Bot import Bot
 from Login_Settings_General import Login_Settings
-
+import General_Posts
+import datetime
 # Creates twitter_bot that connects to twitter account
 bot = Bot(consumer_key=Login_Settings.twitter['CONSUMER_KEY'],
           consumer_secret=Login_Settings.twitter['CONSUMER_SECRET'],
@@ -21,3 +22,11 @@ for mention in mentions:
 with open("last_mention_id.txt","w+") as f:
     f.write(latest_mention)
     f.close()
+
+time = datetime.datetime.now()
+post_list = General_Posts.function_names.keys()
+
+with open("latest_post.txt", "w+") as f:
+    f.write(str(time) + "\n")
+    for post in post_list:
+        f.write(post + "\n")
