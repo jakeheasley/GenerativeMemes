@@ -6,9 +6,9 @@ class CV:
 
     def __init__(self):
         self.client = vision.ImageAnnotatorClient.from_service_account_file("../Prototype/Login_Settings_General/GCV_login_3.json")
-        #todo: fix filepath issues (now that passwords are in another directory, the location of the password
-        # is relative to the location of the code calling the constructor and not
-        # this code which defines the constructor
+        # todo: fix filepath issues (now that passwords are in another directory, the location of the password
+        #   is relative to the location of the code calling the constructor and not
+        #   this code which defines the constructor
 
     def open_image(self, path):
         """open a given file and return its data for processing
