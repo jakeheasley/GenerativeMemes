@@ -4,7 +4,7 @@
 
 # Posts inspirational message
 def inspire(bot, sql, chain):
-    tweets = sql.trend_query("inspired")
+    tweets = sql.tag_query("inspired")
 
     chain.update_text(tweets)
     generated = chain.make_sent()
@@ -13,7 +13,7 @@ def inspire(bot, sql, chain):
 
 
 def weather(bot, sql, chain):
-    tweets = sql.trend_query("weather")
+    tweets = sql.tag_query("weather")
 
     chain.update_text(tweets)
     generated = chain.make_sent()
@@ -22,7 +22,7 @@ def weather(bot, sql, chain):
 
 
 def horoscope(bot, sql, chain):
-    tweets = sql.trend_query("horoscope")
+    tweets = sql.tag_query("horoscope")
 
     chain.update_text(tweets)
     generated = chain.make_sent()

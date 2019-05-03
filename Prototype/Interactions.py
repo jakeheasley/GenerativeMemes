@@ -46,7 +46,7 @@ def impersonate(bot, sql, chain, mention):
 def inspire_me(bot, sql, chain, mention):
     tweet_id = mention["tweet_id"]
     tweeter = "@" + mention["username"]
-    tweets = sql.trend_query("inspired")
+    tweets = sql.tag_query("inspired")
     chain.update_text(tweets)
 
     text = tweeter + chain.make_sent() + " #inspired"
@@ -57,7 +57,7 @@ def inspire_me(bot, sql, chain, mention):
 def weather_report(bot, sql, chain, mention):
     tweet_id = mention["tweet_id"]
     tweeter = "@" + mention["username"]
-    tweets = sql.trend_query("weather")
+    tweets = sql.tag_query("weather")
 
     chain.update_text(tweets)
     text = tweeter + chain.make_sent() + " #WeatherReport"
@@ -70,7 +70,7 @@ def horoscope(bot, sql, chain, mention):
                  "leo", "virgo", "libra", "scorpio", "sagittarius", "capricorn"]
     tweet_id = mention["tweet_id"]
     tweeter = "@" + mention["username"]
-    tweets = sql.trend_query("horoscope")
+    tweets = sql.tag_query("horoscope")
 
     chain.update_text(tweets)
 
@@ -95,7 +95,7 @@ def horoscope(bot, sql, chain, mention):
 def dont_understand(bot, sql, chain, mention):
     tweeter = "@" + mention["username"]
     tweet_id = mention["tweet_id"]
-    chain.update_text(sql.trend_query("flirt"))
+    chain.update_text(sql.tag_query("flirt"))
     text = tweeter + " " + "\"" + chain.make_sent(140) + " #ILoveYou #ButIDontUnderstandYou"
     bot.upload_text(text=text, reply=tweet_id)
 
