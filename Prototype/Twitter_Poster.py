@@ -39,7 +39,7 @@ def make_trend():
 
     tweet_list = bot.search_tweets(search_trend, sql_trend)
     database_insertion(tweet_list)
-    return sql.trend_query(sql_trend)
+    return sql.tag_query(sql_trend)
 
 
 def make_tweet():
