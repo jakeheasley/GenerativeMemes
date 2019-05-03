@@ -9,17 +9,13 @@ class SQL:
         self.database = database
         self.handle  = ""
 
-        self.db = mysql.connect(
-            host = self.host,
-            port = self.port,
-            user = self.username,
-            passwd = self.password,
-            database = self.database
-        )
+        self.open_connection()
 
-        self.cursor = self.db.cursor()
-
-    def insertion(self, tweet_tuple):
+    def insertion_tweet(self, tweet_tuple):
+        """inserts a tweet into the Tweets table in the database
+        @:param takes a tuple with the information (Author of tweet, Tweet text, id of Tweet,
+        id of Tweet, hashtag/category of tweet, date pulled of tweet, date of tweet creation)
+        """
         sql_insert = """insert ignore into Tweets (Author, Tweet, id, tag, date_pulled, tweet_date) values (%s,%s,%s,%s,%s,%s);"""
         self.cursor.executemany(sql_insert, tweet_tuple)
         self.db.commit()
@@ -39,7 +35,6 @@ class SQL:
         self.cursor.executemany(sql_insert, tuple_list)
         self.db.commit()
 
-    #helper method with finding correct id for label
     def photo_id_search(self, label):
         sql_query = "select id from ocr where label = %s"
         self.cursor.execute(sql_query,(label,))
@@ -51,8 +46,12 @@ class SQL:
                 return(0)
         return(temp[0])
 
-    #query tweets from database based on author's handle
+
     def author_query(self, author):
+        """returns list of tweets based on the author of the tweet
+        @:param takes the handle of author of Twitter (without @ just string)
+        @:return a list of tweets which are strings to be proccessed
+        """
         query = """select Tweet from Tweets where author =  %s"""
         self.cursor.execute(query, (author,))
         query_list = []
@@ -60,7 +59,11 @@ class SQL:
             query_list.append(x[0])
         return query_list
 
-    def trend_query(self, trend):
+    def tag_query(self, tag):
+        """returns list of tweets that based on their tag
+        @:param the tag of tweet that was inserted into database
+        @:return a list of tweets that have associated tag in database
+        """
         query = """select Tweet from Tweets where tag =  %s;"""
         self.cursor.execute(query, (trend,))
         query_list = []
@@ -87,10 +90,20 @@ class SQL:
         query = "select photo from ocr where label = %s"
         self.cursor.execute(query,(photo_label,))
 
-    # testes whether the current query has returned nothing
-    def query_test(self):
-        # currently in thought process
-        a = 2
-    #closes connection with database do so when done with object
+    def open_connection(self):
+        """opens connection to database and cursor, used after closing and
+        initializing of SQL object"""
+        self.db = mysql.connect(
+            host = self.host,
+            port = self.port,
+            user = self.username,
+            passwd = self.password,
+            database = self.database
+        )
+
+        self.cursor = self.db.cursor()
+
     def close(self):
+        """suggested to close connections to cursor and database after querying"""
         self.cursor.close()
+        self.db.close()
