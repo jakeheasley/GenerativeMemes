@@ -11,6 +11,19 @@ class SQL:
 
         self.open_connection()
 
+    def table_setup(self):
+        """
+        This creates the tables that are later used in this file. Make sure that you are on a new schema.
+        """
+        self.cursor.execute("create database Memes;")
+        self.cursor.execute("use Memes;")
+        self.cursor.execute("create table Tweets (Author text, Tweet longtext, id bigint, trend text, date_pulled date, tweet_date date, Primary key (id));")
+
+        # creation statments for cloud vision tables
+        "use Memes;"
+        "create table ocr (photo longblob, label longtext, id int auto_increment, primary key(id));"
+        "create table ocr_similar (photo_text varchar(140), photo_id int, foreign key(photo_id) references ocr(id), primary key(photo_text, photo_id));"
+
     def insertion_tweet(self, tweet_tuple):
         """inserts a tweet into the Tweets table in the database
         @:param takes a tuple with the information (Author of tweet, Tweet text, id of Tweet,
