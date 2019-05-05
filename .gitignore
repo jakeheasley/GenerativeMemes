@@ -9,3 +9,7 @@ Prototype\Markov_Object\__pycache__\Markov_Chain.cpython-36.pyc
 Prototype\Markov_Object\__pycache__\__init__.cpython-36.pyc
 .idea
 Prototype/Login_Settings_General/
+Prototype/Login_Settings_General/*
+Login_Settings_General/__init__.py
+Login_Settings_General/GCV_login_3.json
+Login_Settings_General/Login_Settings.py
