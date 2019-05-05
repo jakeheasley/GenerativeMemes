@@ -1,5 +1,5 @@
 from Login_Settings_General import Login_Settings
-import SQL
+from SQL import SQL
 
 sql = SQL(host=Login_Settings.database['HOST'],
           port=Login_Settings.database['PORT'],

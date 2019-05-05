@@ -1,5 +1,5 @@
-from Twitter_Bot.Bot import Bot
-from Markov_Object.Markov_Chain import Chain
+from Bot import Bot
+from Markov_Chain import Chain
 from SQL import SQL
 from Login_Settings_General import Login_Settings
 import Interactions
@@ -96,5 +96,5 @@ while True:
             for l in post_list:
                 f.write(l + "\n")
 
-    #  Sleeps for 60 seconds
+    #  Sleeps for 15 seconds
     time.sleep(15)

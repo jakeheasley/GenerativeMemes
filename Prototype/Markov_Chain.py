@@ -24,7 +24,7 @@ class Chain:
         @:param chars: optional parameter when you want to set the character limit for a sentence"""
 
         if chars is None:
-            chars=self.chars
+            chars = self.chars
 
         while True:
             sentence = self.model.make_short_sentence(max_chars=chars,
