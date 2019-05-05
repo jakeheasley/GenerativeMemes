@@ -5,11 +5,11 @@ import re
 class Chain:
 
     def __init__(self, chars, tries, ratio, tweet_list):
-        """constructor for a new markov chain
+        """
         @:param chars: integer instance variable for max characters in a sentence.
         @:param tries: integer number of attempts to acheive optimal ratio.
         @:param ratio: decimal between 0-1 indicating desired similarity to original text.
-        TODO: make this work with any text, not just specifically a list of tweets?"""
+        """
 
         self.text = "\n".join(tweet_list)
 
@@ -20,7 +20,7 @@ class Chain:
         self.ratio = ratio
 
     def make_sent(self, chars=None):
-        """Returns a generated sentence based on current text
+        """Returns a generated sentence based on current text.
         @:param chars: optional parameter when you want to set the character limit for a sentence"""
 
         if chars is None:
