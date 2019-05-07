@@ -52,21 +52,24 @@ def interaction_logic(tweet):
     # Ignores any tweets from the bot itself
     if tweet["username"] == "markoving_bot":
         new_tweet = bot.get_status(tweet["reply_id"])
-        interaction_logic(new_tweet)
+        return interaction_logic(new_tweet), tweet
 
     # If the bot doesn't understand the tweet, check if the tweet is a reply
     # If the tweet is a reply, check the previous tweet, if not call dont_understand function
     elif len(instruction) is 0 or instruction[0].lower() not in Interactions.function_names.keys():
         if tweet["reply_id"] is None:
-            Interactions.dont_understand(bot, sql, chain, tweet)
+            user_function = Interactions.dont_understand
+            return user_function, tweet
         else:
             new_tweet = bot.get_status(tweet["reply_id"])
-            interaction_logic(new_tweet)
+            return interaction_logic(new_tweet), tweet
 
     # if the bot does understand the tweet, do instruction
     else:
         user_function = Interactions.function_names[instruction[0].lower()]
-        user_function(bot, sql, chain, tweet)
+        return user_function, tweet
+
+
 
 
 def mentions():
@@ -81,7 +84,9 @@ def mentions():
 
             tweet_id = mention["tweet_id"]
 
-            interaction_logic(mention)
+            interaction, tweet = interaction_logic(mention)
+            tweet["tweet_id"] = mention["tweet_id"]
+            interaction(bot, sql, chain, tweet)
 
             if int(tweet_id) > int(latest_mention):
                 latest_mention = tweet_id
