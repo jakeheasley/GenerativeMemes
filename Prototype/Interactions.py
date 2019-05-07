@@ -31,7 +31,7 @@ def impersonate(bot, sql, chain, mention):
         bot.upload_text(text=text, reply=tweet_id)
         return
 
-    sql.insertion(tweets)
+    sql.insertion_tweet(tweets)
     tweets = sql.author_query(scrape)
 
     chain.update_text(tweets)

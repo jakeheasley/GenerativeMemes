@@ -7,10 +7,6 @@ import General_Posts
 import datetime
 import time
 
-chars = 140
-tries = 100
-ratio = .4
-
 # ID of latest post that mentioned bot. Default to zero (will change)
 with open("last_mention_id.txt", "r") as f:
     latest_mention = f.read()
@@ -20,14 +16,15 @@ with open("latest_post.txt", "r") as f:
     info = f.read().splitlines()
     f.close()
 
-# Gets last post from file in correct datetime format
+# Gets last post time from file in correct datetime format
 latest_post = datetime.datetime.strptime(info.pop(0), "%Y-%m-%d %H:%M:%S.%f")
 
-# List of General_Post functions (update as you create functions)
+# Get order of general posts
 post_list = info
 
-# Tracker that is set to the last time bot posted, does not include interactions
-
+chars = 140
+tries = 100
+ratio = .4
 
 # Creates twitter_bot that connects to twitter account
 bot = Bot(consumer_key=Login_Settings.twitter['CONSUMER_KEY'],
@@ -47,28 +44,45 @@ chain = Chain(chars=chars,
               tries=tries,
               ratio=ratio,
               tweet_list=["dummy info \n"])
-while True:
+
+
+def interaction_logic(tweet):
+    instruction = tweet["text"].split('@markoving_bot, 1')[0].split()[1:]
+
+    # Ignores any tweets from the bot itself
+    if tweet["username"] == "markoving_bot":
+        new_tweet = bot.get_status(tweet["reply_id"])
+        interaction_logic(new_tweet)
+
+    # If the bot doesn't understand the tweet, check if the tweet is a reply
+    # If the tweet is a reply, check the previous tweet, if not call dont_understand function
+    elif len(instruction) is 0 or instruction[0].lower() not in Interactions.function_names.keys():
+        if tweet["reply_id"] is None:
+            Interactions.dont_understand(bot, sql, chain, tweet)
+        else:
+            new_tweet = bot.get_status(tweet["reply_id"])
+            interaction_logic(new_tweet)
+
+    # if the bot does understand the tweet, do instruction
+    else:
+        user_function = Interactions.function_names[instruction[0].lower()]
+        user_function(bot, sql, chain, tweet)
+
+
+def mentions():
+    global latest_mention
+
     # Gets all the times that the bot is mentioned
-    mentions = bot.get_mentions(latest_mention)
+    mention_list = bot.get_mentions(latest_mention)
 
     # Only runs if there are any new mentions
-    if len(mentions) > 0:
-        for mention in mentions:
-
-            # Username of person that @ the bot
-            tweeter = "@"+mention["username"]
+    if len(mention_list) > 0:
+        for mention in mention_list:
 
             tweet_id = mention["tweet_id"]
 
-            # Removes all text before mention and then parses later text into list
-            instruction = mention["text"].split('@markoving_bot, 1')[0].split()[1:]
-            # If instruction is not in interaction dictionary
-            if len(instruction) is 0 or instruction[0].lower() not in Interactions.function_names.keys():
-                Interactions.dont_understand(bot, sql, chain, mention)
-            else:
-                # Calls the interaction function
-                user_function = Interactions.function_names[instruction[0].lower()]
-                user_function(bot, sql, chain, mention)
+            interaction_logic(mention)
+
             if int(tweet_id) > int(latest_mention):
                 latest_mention = tweet_id
 
@@ -76,9 +90,13 @@ while True:
                 with open("last_mention_id.txt", "w+") as f:
                     f.write(latest_mention)
 
+
+def general_posts():
+    global latest_post
+
     # Determines if it has been three hours since previous post
     current_time = datetime.datetime.now()
-    time_passed = current_time-latest_post
+    time_passed = current_time - latest_post
 
     if time_passed.total_seconds() > 10800:
         # Get function from dictionary using post_list
@@ -92,9 +110,13 @@ while True:
         latest_post = datetime.datetime.now()
 
         with open("latest_post.txt", "w+") as f:
-            f.write(str(latest_post)+"\n")
+            f.write(str(latest_post) + "\n")
             for l in post_list:
                 f.write(l + "\n")
 
+
+while True:
+    mentions()
+    general_posts()
     #  Sleeps for 15 seconds
     time.sleep(15)

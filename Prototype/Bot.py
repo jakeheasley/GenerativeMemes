@@ -78,8 +78,15 @@ class Bot:
         return tweets
 
     def get_status(self, tweet_id):
-        tweet_list =self.api.statuses_lookup([tweet_id])
-        return tweet_list[0]
+        tweet = self.api.statuses_lookup([tweet_id])
+        tweet_text = re.sub("https:.*$", "", tweet.full_text)
+        tweet_text = re.sub("&amp", "&", tweet_text)
+
+        format_tweet = {"username": tweet.user.screen_name,
+                                   "text": tweet_text,
+                                   "tweet_id": tweet.id_str,
+                                   "reply_id": tweet.in_reply_to_status_id}
+        return format_tweet
 
     def get_mentions(self, recent_id):
         """gets all tweets that @mention the bot.
@@ -101,21 +108,6 @@ class Bot:
                                    "reply_id": tweet.in_reply_to_status_id})
 
         return tweet_list
-
-    def get_trends(self, location):
-        """returns dictionary of hashtag trends and their respective search queries.
-        @:param location: TODO what's this?
-        @:return trend_search: TODO what's this?"""
-        trends = self.api.trends_place(location)
-        trend_search = {}
-
-        with open('data.txt', 'w+') as outfile:
-            json.dump(trends[0], outfile)
-
-        for trend in trends[0]['trends']:
-            if "#" in trend['name']:
-                trend_search[trend['name']] = trend['query']
-        return trend_search
 
     def rate_status(self):
         """@:return number of queries remaining per hour."""
