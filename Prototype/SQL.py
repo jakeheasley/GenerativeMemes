@@ -78,7 +78,7 @@ class SQL:
         @:return a list of tweets that have associated tag in database
         """
         query = """select Tweet from Tweets where tag =  %s;"""
-        self.cursor.execute(query, (trend,))
+        self.cursor.execute(query, (tag,))
         query_list = []
         for x in self.cursor:
             query_list.append(x[0])

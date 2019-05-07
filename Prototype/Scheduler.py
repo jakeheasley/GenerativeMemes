@@ -46,13 +46,16 @@ chain = Chain(chars=chars,
               tweet_list=["dummy info \n"])
 
 
+""" Method that determines how the bot responds to a tweet. If the bot understands a command it will 
+ do the command. If it doesn't, it will try and go up the tweet thread until it finds a command to do. If that
+ fails, it will respond by with stuff saying it doesn't understand"""
 def interaction_logic(tweet):
     instruction = tweet["text"].split('@markoving_bot, 1')[0].split()[1:]
 
     # Ignores any tweets from the bot itself
     if tweet["username"] == "markoving_bot":
         new_tweet = bot.get_status(tweet["reply_id"])
-        return interaction_logic(new_tweet), tweet
+        return interaction_logic(new_tweet)
 
     # If the bot doesn't understand the tweet, check if the tweet is a reply
     # If the tweet is a reply, check the previous tweet, if not call dont_understand function
@@ -62,7 +65,7 @@ def interaction_logic(tweet):
             return user_function, tweet
         else:
             new_tweet = bot.get_status(tweet["reply_id"])
-            return interaction_logic(new_tweet), tweet
+            return interaction_logic(new_tweet)
 
     # if the bot does understand the tweet, do instruction
     else:
@@ -70,8 +73,8 @@ def interaction_logic(tweet):
         return user_function, tweet
 
 
-
-
+"""Method that gets all of the latest mentions and runs the interaction logic funtion.
+Sets the latest_mention id too."""
 def mentions():
     global latest_mention
 
@@ -86,6 +89,7 @@ def mentions():
 
             interaction, tweet = interaction_logic(mention)
             tweet["tweet_id"] = mention["tweet_id"]
+
             interaction(bot, sql, chain, tweet)
 
             if int(tweet_id) > int(latest_mention):
@@ -96,6 +100,7 @@ def mentions():
                     f.write(latest_mention)
 
 
+# Facilitates general posting (what to post, when).
 def general_posts():
     global latest_post
 
@@ -120,6 +125,7 @@ def general_posts():
                 f.write(l + "\n")
 
 
+# Runs constantly
 while True:
     mentions()
     general_posts()

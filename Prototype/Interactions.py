@@ -3,7 +3,6 @@
     object, chain, and mention tweet"""
 import tweepy
 from ast import literal_eval
-import random
 
 
 # Generates random tweet from twitter account specified by user
@@ -15,23 +14,24 @@ def impersonate(bot, sql, chain, mention):
     tweet_id = mention["tweet_id"]
 
     # Error handling for unknown username and/or any other tweepy error
-    try:
-        tweets = bot.get_user_tweets(scrape)
-    except tweepy.TweepError as e:
+    if len(sql.author_query(scrape)) == 0:
+        try:
+            tweets = bot.get_user_tweets(scrape)
+        except tweepy.TweepError as e:
 
-        # Evaluating error message as dict
-        error_dict = literal_eval(e.response.text)
+            # Evaluating error message as dict
+            error_dict = literal_eval(e.response.text)
 
-        # Getting error code
-        error_num = error_dict["errors"][0]["code"]
-        if int(error_num) == 34:
-            text = tweeter + " Sorry, but we couldn't find that Twitter user!"
-        else:
-            text = tweeter + " Sorry! Something's gone wrong on my end. Try again!"
-        bot.upload_text(text=text, reply=tweet_id)
-        return
+            # Getting error code
+            error_num = error_dict["errors"][0]["code"]
+            if int(error_num) == 34:
+                text = tweeter + " Sorry, but we couldn't find that Twitter user!"
+            else:
+                text = tweeter + " Sorry! Something's gone wrong on my end. Try again!"
+            bot.upload_text(text=text, reply=tweet_id)
+            return
 
-    sql.insertion_tweet(tweets)
+        sql.insertion_tweet(tweets)
     tweets = sql.author_query(scrape)
 
     chain.update_text(tweets)
@@ -49,7 +49,7 @@ def inspire_me(bot, sql, chain, mention):
     tweets = sql.tag_query("inspired")
     chain.update_text(tweets)
 
-    text = tweeter + chain.make_sent() + " #inspired"
+    text = tweeter + " " + chain.make_sent() + " #inspired"
     bot.upload_text(text=text, reply=tweet_id)
 
 
@@ -60,7 +60,7 @@ def weather_report(bot, sql, chain, mention):
     tweets = sql.tag_query("weather")
 
     chain.update_text(tweets)
-    text = tweeter + chain.make_sent() + " #WeatherReport"
+    text = tweeter + " " + chain.make_sent() + " #WeatherReport"
     bot.upload_text(text=text, reply=tweet_id)
 
 
@@ -87,7 +87,7 @@ def horoscope(bot, sql, chain, mention):
     else:
         seed = "#" + sign[0].upper() + sign[1:] + ":"
 
-        text = tweeter + chain.make_sent_seed(seed) + " #horoscope"
+        text = tweeter + " " + chain.make_sent_seed(seed) + " #horoscope"
         bot.upload_text(text=text, reply=tweet_id)
 
 
