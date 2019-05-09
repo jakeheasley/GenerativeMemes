@@ -29,3 +29,9 @@ Other libraries we use:
 * Finally, when you want to start your bot, run Scheduler and the bot will run indefinitely. It is recommended to set up some other
   scripts to check if your bot has stopped running and jumpstart the bot again. The scripts we use are in the "Helper Scripts"
   file and can be used as a reference, but may not work on your device.
+  
+### Issues you might run into while creating and customizing your bot:
+* You can customize how often your bot runs, or how many tweets it scrapes, but Twitter does limit how often you can do this
+  if you don't have a paying developer account. To ensure that you don't go over the limit, check the Twitter API. There
+  is also a function in Bot.py called rate_status that will let you know how many uses you have left for every single Twitter 
+  API function.
