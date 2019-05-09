@@ -10,7 +10,11 @@ def impersonate(bot, sql, chain, mention):
     tweeter = "@" + mention['username']
 
     # Get the the person we want to impersonate from the instruction
-    scrape = mention["text"].split(bot.handle, '1')[0].split()[2]
+    scrape = mention["text"].split('bot.handle, 1')[0].split()[2]
+
+    # Removes @ just in case someone @ the person they wanted us to impersonate
+    if scrape[0] == "@":
+        scrape = scrape[1:]
     tweet_id = mention["tweet_id"]
 
     # Error handling for unknown username and/or any other tweepy error
@@ -75,7 +79,7 @@ def horoscope(bot, sql, chain, mention):
     chain.update_text(tweets)
 
     # Get sign from instruction
-    sign = mention["text"].split(bot.handle, '1')[0].split()[2]
+    sign = mention["text"].split('bot.handle, 1')[0].split()[2]
 
     # Checking for incorrect signs/Ophiuchus
     if sign.lower() not in sign_list:

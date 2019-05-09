@@ -50,8 +50,8 @@ chain = Chain(chars=chars,
  do the command. If it doesn't, it will try and go up the tweet thread until it finds a command to do. If that
  fails, it will respond by with stuff saying it doesn't understand"""
 def interaction_logic(tweet):
-    instruction = tweet["text"].split(bot.handle,'1')[0].split()[1:]
-    # todo:
+
+    instruction = tweet["text"].split('bot.handle,1')[0].split()[1:]
 
     # Ignores any tweets from the bot itself
     if tweet["username"] == bot.handle[1:]:
