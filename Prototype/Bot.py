@@ -14,7 +14,7 @@ class Bot:
         auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
         auth.set_access_token(access_key, access_secret)
         self.api = tweepy.API(auth)
-        self.handle = "@markoving_bot"
+        self.handle = "@karen_the_bot"
 
     def upload_text(self, text, reply=None):
         """tweets text.
@@ -98,7 +98,7 @@ class Bot:
         tweet_list = []
         for tweet in mentions.items(500):
             # Ensures that the bot is not responding to a previous response
-            if not ((tweet.user.screen_name == "markoving_bot") and (tweet.in_reply_to_status_id is not None)):
+            if not ((tweet.user.screen_name == self.handle[1:]) and (tweet.in_reply_to_status_id is not None)):
                 tweet_text = re.sub("https:.*$", "", tweet.full_text)
                 tweet_text = re.sub("&amp", "&", tweet_text)
 
