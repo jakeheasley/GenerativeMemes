@@ -1,8 +1,11 @@
-"""Collection of functions that involve user interaction.
-    All interaction functions should be passed the bot object, sql
-    object, chain, and mention tweet"""
+# Collection of functions that involve user interaction.
+# All interaction functions should be passed the bot object, sql
+# object, chain, and mention tweet
 import tweepy
 from ast import literal_eval
+
+# todo: fuzzify instruction argument matching; i.e. for functions that allow it, use argument
+#  from anywhere in the tweet, not just the word immediately following.
 
 
 # Generates random tweet from twitter account specified by user
@@ -84,7 +87,7 @@ def horoscope(bot, sql, chain, mention):
     # Checking for incorrect signs/Ophiuchus
     if sign.lower() not in sign_list:
         if sign.lower() is "Ophiuchus":
-            text = tweeter + " This bot doesn't believe in that sign #only12"
+            text = tweeter + " I doesn't believe in that sign #only12"
         else:
             text = tweeter + " That sign doesn't seem to exist yet"
         bot.upload_text(text=text, reply=tweet_id)
