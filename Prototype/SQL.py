@@ -19,6 +19,7 @@ class SQL:
         self.cursor.execute("use Memes;")
         self.cursor.execute("create table Tweets (Author text, Tweet longtext, id bigint, trend text, date_pulled date, tweet_date date, Primary key (id));")
 
+        # TODO: we no longer need this, right?
         # creation statments for cloud vision tables
         "use Memes;"
         "create table ocr (photo longblob, label longtext, id int auto_increment, primary key(id));"
