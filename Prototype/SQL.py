@@ -14,12 +14,13 @@ class SQL:
 
     def table_setup(self):
         """
-        This creates the tables that are later used in this file. Make sure that you are on a new schema.
-        """
-        self.cursor.execute("create database Memes;")
-        self.cursor.execute("use Memes;")
-        self.cursor.execute("create table Tweets (Author text, Tweet longtext, id bigint, trend text, date_pulled date, tweet_date date, Primary key (id));")
-
+        This creates the tables that are later used in this file. Make sure that you are on a new schema."""
+        try:
+            self.cursor.execute("create database Memes;")
+            self.cursor.execute("use Memes;")
+            self.cursor.execute("create table Tweets (Author text, Tweet longtext, id bigint, trend text, date_pulled date, tweet_date date, Primary key (id));")
+        except:
+            print("tables are already setup")
         # TODO: we no longer need this, right?
         # creation statments for cloud vision tables
         "use Memes;"

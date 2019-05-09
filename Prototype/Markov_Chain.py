@@ -1,5 +1,4 @@
 import markovify
-import re
 
 
 class Chain:

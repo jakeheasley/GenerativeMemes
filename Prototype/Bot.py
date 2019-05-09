@@ -77,7 +77,7 @@ class Bot:
         return tweets
 
     def get_status(self, tweet_id):
-        tweet = self.api.statuses_lookup([tweet_id],tweet_mode='extended')[0]
+        tweet = self.api.statuses_lookup([tweet_id], tweet_mode='extended')[0]
         tweet_text = re.sub("https:.*$", "", tweet.full_text)
         tweet_text = re.sub("&amp", "&", tweet_text)
 
