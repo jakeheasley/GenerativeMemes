@@ -1,4 +1,6 @@
 import string
+
+
 def find_rare_word(input_text, tweet):
     word_dict = {}
     table = str.maketrans({key: None for key in string.punctuation})
