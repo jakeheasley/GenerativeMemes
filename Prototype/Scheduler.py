@@ -46,12 +46,13 @@ chain = Chain(chars=chars,
               tweet_list=["dummy info \n"])
 
 
-""" Method that determines how the bot responds to a tweet. If the bot understands a command it will 
- do the command. If it doesn't, it will try and go up the tweet thread until it finds a command to do. If that
- fails, it will respond by with stuff saying it doesn't understand"""
 def interaction_logic(tweet):
-    instruction = tweet["text"].split(bot.handle,'1')[0].split()[1:]
-    # todo:
+    """ Method that determines how the bot responds to a tweet. If the bot understands a command it will
+     do the command. If it doesn't, it will try and go up the tweet thread until it finds a command to do. If that
+     fails, it will respond by with stuff saying it doesn't understand"""
+    # instruction = tweet["text"].split(bot.handle, '1')[0].split()[1:]
+    tweet_words = tweet['text'].split()
+    instruction = next(word for word in tweet_words if word in Interactions.function_names.keys())
 
     # Ignores any tweets from the bot itself
     if tweet["username"] == bot.handle[1:]:
@@ -74,9 +75,9 @@ def interaction_logic(tweet):
         return user_function, tweet
 
 
-"""Method that gets all of the latest mentions and runs the interaction logic funtion.
-Sets the latest_mention id too."""
 def mentions():
+    """Method that gets all of the latest mentions and runs the interaction logic funtion.
+    Sets the latest_mention id too."""
     global latest_mention
 
     # Gets all the times that the bot is mentioned
