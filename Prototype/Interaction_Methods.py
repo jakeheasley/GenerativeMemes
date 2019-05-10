@@ -24,8 +24,8 @@ def find_rare_word(input_text, tweet):
 
 
 
-a = ["this is,./ a test","this","test","webs area cool./,/.;;;;;"]
-b  ="hello,ea.,/: this area; asdasd"
+a = ["hello","whats","up","whats up;"]
+b  ="hello, whats up?"
 
 
 print(find_rare_word(a,b))
