@@ -4,20 +4,13 @@
 import tweepy
 from ast import literal_eval
 
-# todo: fuzzify instruction argument matching; i.e. for functions that allow it, use argument
-#  from anywhere in the tweet, not just the word immediately following.
-
 
 # Generates random tweet from twitter account specified by user
 def impersonate(bot, sql, chain, mention):
     tweeter = "@" + mention['username']
 
     # Get the the person we want to impersonate from the instruction
-    scrape = mention["text"].split('bot.handle, 1')[0].split()[2]
-
-    # Removes @ just in case someone @ the person they wanted us to impersonate
-    if scrape[0] == "@":
-        scrape = scrape[1:]
+    scrape = mention["text"].split(bot.handle, '1')[0].split()[2]
     tweet_id = mention["tweet_id"]
 
     # Error handling for unknown username and/or any other tweepy error
@@ -82,12 +75,12 @@ def horoscope(bot, sql, chain, mention):
     chain.update_text(tweets)
 
     # Get sign from instruction
-    sign = mention["text"].split('bot.handle, 1')[0].split()[2]
+    sign = mention["text"].split(bot.handle, '1')[0].split()[2]
 
     # Checking for incorrect signs/Ophiuchus
     if sign.lower() not in sign_list:
         if sign.lower() is "Ophiuchus":
-            text = tweeter + " I doesn't believe in that sign #only12"
+            text = tweeter + " I don't believe in that sign #only12"
         else:
             text = tweeter + " That sign doesn't seem to exist yet"
         bot.upload_text(text=text, reply=tweet_id)
