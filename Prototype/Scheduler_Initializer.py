@@ -1,10 +1,11 @@
-'''Run this whenever you run the program on a new machine
-as it will determine what the latest mention and post is before scheduler determines it'''
+# Run this whenever you run the program on a new machine
+# as it will determine what the latest mention and post is before scheduler determines it
 
 from Bot import Bot
 from Login_Settings_General import Login_Settings
 import General_Posts
 import datetime
+
 
 def initialize():
     # Creates twitter_bot that connects to twitter account
@@ -34,5 +35,8 @@ def initialize():
             f.write(post + "\n")
 
 
-if __name__ == "main":
+def main():
     initialize()
+
+
+main()
