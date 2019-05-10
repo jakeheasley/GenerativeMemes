@@ -1,5 +1,5 @@
-"""Collection of functions that post to twitter feed without user interaction.
-    All General_Post functions should be passed the bot, sql object, and chain"""
+# Collection of functions that post to twitter feed without user interaction.
+# All General_Post functions should be passed the bot, sql object, and chain
 
 
 # Posts inspirational message

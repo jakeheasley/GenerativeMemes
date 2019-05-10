@@ -31,5 +31,8 @@ def config():
     Scheduler_Initializer.initialize()
 
 
-if __name__ == "main":
+def main():
     config()
+
+
+main()

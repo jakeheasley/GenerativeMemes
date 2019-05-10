@@ -46,11 +46,7 @@ class Bot:
         return self.clean_tweets(timeline, tag)
 
     def search_tweets(self, search_term, tag):
-        """searches twitter for supplied search term.
-        @:param search_term: string term to search
-        @:return self.clean_tweets.
-        TODO: what type is self.clean_tweets?
-        TODO: why do we return trend?"""
+        """searches twitter for supplied search term."""
         # initialization of a list to hold all Tweets
         search_term = search_term + "-filter:retweets"
         search_tweets = Cursor(self.api.search, q=search_term,
@@ -59,9 +55,9 @@ class Bot:
 
     def clean_tweets(self, timeline, tag=None):
         """formats tweets for database entry as a tuple-list.
-        @:param timeline: TODO: what's this?
+        @:param timeline: iterable collection of tweets.
         @:param trend: optional hashtag associated with the trend of a tweet
-        @:return list of tuples where each tuple corresponds to one tweet."""
+        @:return list of tuples where each tuple is information about one tweet."""
         tweets = []
         date = datetime.datetime.today()
         date = date.strftime('%Y-%m-%d')
